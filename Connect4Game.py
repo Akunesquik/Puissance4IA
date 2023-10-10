@@ -3,6 +3,7 @@ import sys
 import numpy as np
 import random
 import time
+from agent import DQNAgent
 
 # Initialisation de Pygame
 pygame.init()
@@ -76,20 +77,15 @@ def victoire(joueur):
 
     return False
 
+
 # Fonction pour jouer un coup aléatoire
 def jouer_coup_aleatoire():
     coups_valides = [col for col in range(nb_colonnes) if grille[0][col] == 0]
     return random.choice(coups_valides)
 
-def obtenir_etat_actuel():
-    etat = np.copy(grille)  # Crée une copie de la grille actuelle
 
-    # Remplacez les valeurs 1 (jeton rouge) par 1 et les valeurs 2 (jeton jaune) par -1
-    etat[etat == 1] = 1
-    etat[etat == 2] = -1
-
-    return etat
-
+agent = DQNAgent(nb_colonnes,nb_colonnes)
+nbExpAnalyse = 500
 # Fonction principale du jeu
 def jouer(nb_episodes):
     for _ in range(nb_episodes):  # Boucle pour le nombre d'épisodes spécifié
@@ -105,8 +101,13 @@ def jouer(nb_episodes):
                     sys.exit()
 
             if tour % 2 == 0:
-                colonne = jouer_coup_aleatoire()
+                colonne = agent.jouer_coup_aleatoire(nb_colonnes,grille)
+                ia_prev_state = grille
                 placer_jeton(colonne, 1)
+                ia_next_state = grille
+                ia_action = colonne
+                ia_recompense = 0
+
             else:
                 colonne = jouer_coup_aleatoire()
                 placer_jeton(colonne, 2)
@@ -114,27 +115,31 @@ def jouer(nb_episodes):
             dessiner_grille()
 
             if victoire(1):
-                print("Joueur Rouge gagne !")
+                print("Agent gagne !")
                 jeu_termine = True
-                time.sleep(3)
+                ia_recompense = 1
+                
             elif victoire(2):
-                print("Joueur Jaune gagne !")
+                print("Agent a perdu !")
                 jeu_termine = True
-                time.sleep(3)
+                ia_recompense = -1
+
             elif np.all(grille != 0):
                 print("Match nul !")
                 jeu_termine = True
-                time.sleep(3)
+                ia_recompense = 0
+            
+            if tour % 2 == 0:   
+                ia_done = jeu_termine
+                agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
+                # Vérifiez si le nombre d'expériences dans la mémoire atteint le seuil pour appeler replay
+                  # Appel à replay pour mettre à jour le réseau de neurones
 
             tour += 1
-            time.sleep(0.5)  # Délai pour voir le résultat
-
-        # Demande à l'utilisateur s'il souhaite relancer une partie
-        replay = input("Voulez-vous jouer une autre partie ? (Oui/Non) ").strip().lower()
-        if replay != "oui":
-            pygame.quit()
-            sys.exit()
+            #time.sleep(0.1)  # Délai pour voir le résultat
+                    
 
 # Lancement du jeu avec 5 parties
 if __name__ == "__main__":
-    jouer(nb_episodes=5)  # Spécifiez le nombre d'épisodes à jouer ici
+    jouer(nb_episodes=50)  # Spécifiez le nombre d'épisodes à jouer ici
+    agent.replay(nbExpAnalyse)
