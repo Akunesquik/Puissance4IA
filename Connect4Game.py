@@ -4,6 +4,7 @@ import numpy as np
 import random
 import time
 from agent import DQNAgent
+from recompense import calculer_recompense, trouver_dernier_pion
 
 # Initialisation de Pygame
 pygame.init()
@@ -21,6 +22,7 @@ BLEU = (0, 0, 255)
 ROUGE = (255, 0, 0)
 JAUNE = (255, 255, 0)
 NOIR = (0, 0, 0)
+VERT = (0, 255, 0)
 
 # Création de la fenêtre
 fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
@@ -83,11 +85,19 @@ def jouer_coup_aleatoire():
     coups_valides = [col for col in range(nb_colonnes) if grille[0][col] == 0]
     return random.choice(coups_valides)
 
+def changer_dernierpion(colonne):
+    ligne = trouver_dernier_pion(grille,colonne)
+    pygame.draw.circle(fenetre, VERT, (int(colonne*taille_case+taille_case/2), int(ligne*taille_case+taille_case+taille_case/2)), rayon_jetons)
+    pygame.display.update()
+
 
 agent = DQNAgent(nb_colonnes,nb_colonnes)
-nbExpAnalyse = 500
+
 # Fonction principale du jeu
 def jouer(nb_episodes):
+    compteur_win_agent = 0
+    compteur_lose_agent = 0
+    match_nul = 0
     for _ in range(nb_episodes):  # Boucle pour le nombre d'épisodes spécifié
         tour = 0
         jeu_termine = False
@@ -101,8 +111,8 @@ def jouer(nb_episodes):
                     sys.exit()
 
             if tour % 2 == 0:
-                colonne = agent.jouer_coup_aleatoire(nb_colonnes,grille)
                 ia_prev_state = grille
+                colonne = agent.act(ia_prev_state)
                 placer_jeton(colonne, 1)
                 ia_next_state = grille
                 ia_action = colonne
@@ -117,19 +127,24 @@ def jouer(nb_episodes):
             if victoire(1):
                 print("Agent gagne !")
                 jeu_termine = True
-                ia_recompense = 1
+                ia_recompense += 100
+                compteur_win_agent = compteur_win_agent +1
                 
             elif victoire(2):
                 print("Agent a perdu !")
                 jeu_termine = True
-                ia_recompense = -1
+                ia_recompense += -100
+                compteur_lose_agent = compteur_lose_agent +1
 
             elif np.all(grille != 0):
                 print("Match nul !")
                 jeu_termine = True
-                ia_recompense = 0
+                ia_recompense += 0
+                match_nul = match_nul +1
             
             if tour % 2 == 0:   
+                ia_recompense += calculer_recompense(ia_prev_state,ia_action)
+                #changer_dernierpion(ia_action)
                 ia_done = jeu_termine
                 agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
                 # Vérifiez si le nombre d'expériences dans la mémoire atteint le seuil pour appeler replay
@@ -137,9 +152,15 @@ def jouer(nb_episodes):
 
             tour += 1
             #time.sleep(0.1)  # Délai pour voir le résultat
+    with open("avancement_IA.txt", "a") as fichier:
+        ligne = "V : " + str(compteur_win_agent) + " // D : " + str(compteur_lose_agent) + " // Nul : " + str(match_nul)
+        
+        # Écrire la ligne dans le fichier
+        fichier.write(ligne + "\n")
                     
-
+nbExpAnalyse = 500
 # Lancement du jeu avec 5 parties
 if __name__ == "__main__":
-    jouer(nb_episodes=50)  # Spécifiez le nombre d'épisodes à jouer ici
-    agent.replay(nbExpAnalyse)
+    for i in range(10):
+        jouer(nb_episodes=5000)  # Spécifiez le nombre d'épisodes à jouer ici
+        agent.replay(nbExpAnalyse)
