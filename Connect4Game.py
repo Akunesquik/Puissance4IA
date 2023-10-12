@@ -96,7 +96,7 @@ fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
 pygame.display.set_caption("Puissance 4")
 
 agent = DQNAgent(nb_colonnes,nb_colonnes)
-agent.model = charger_reseau(sys.argv[2])
+#agent.model = charger_reseau(sys.argv[2])
 nbPartie = int(sys.argv[1])
 
 # Fonction principale du jeu
@@ -170,5 +170,5 @@ def jouer(nb_episodes):
 
 if __name__ == "__main__":
     jouer(nbPartie)  # Spécifiez le nombre d'épisodes à jouer ici
-    agent.replay(nbPartie//2)
+    agent.replay(nbPartie//10)
     sauvegarder_reseau(agent,sys.argv[2])
