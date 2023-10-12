@@ -9,7 +9,7 @@ class DQNAgent:
     def __init__(self, state_size, action_size):
         self.state_size = state_size
         self.action_size = action_size
-        self.memory = deque(maxlen=20000000)  # Replay memory
+        self.memory = deque(maxlen=20000)  # Replay memory
         self.gamma = 0.95  # Facteur d'escompte
         self.epsilon = 1.0  # Exploration initiale
         self.epsilon_decay = 0.995  # Taux de décroissance de l'exploration
