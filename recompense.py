@@ -82,11 +82,11 @@ def recompense_longueur(longueur):
     recompense = 0
     if longueur == 1:
         recompense = -3
-    if longueur == 2:
-        recompense = 1
-    if longueur == 3:
-        recompense = 10
-    if longueur == 4:
+    elif longueur == 2:
+        recompense = 30
+    elif longueur == 3:
+        recompense = 0
+    else:
         recompense = 100
     return recompense
 

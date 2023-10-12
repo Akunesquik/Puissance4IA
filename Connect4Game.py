@@ -170,5 +170,5 @@ def jouer(nb_episodes):
 
 if __name__ == "__main__":
     jouer(nbPartie)  # Spécifiez le nombre d'épisodes à jouer ici
-    agent.replay(nbPartie//5)
+    agent.replay(nbPartie//2)
     sauvegarder_reseau(agent,sys.argv[2])
