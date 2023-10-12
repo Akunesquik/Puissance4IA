@@ -5,6 +5,8 @@ import random
 import time
 from agent import DQNAgent
 from recompense import calculer_recompense, trouver_dernier_pion
+from sauvegarde import sauvegarder_reseau, charger_reseau
+import sys
 
 # Initialisation de Pygame
 pygame.init()
@@ -24,9 +26,7 @@ JAUNE = (255, 255, 0)
 NOIR = (0, 0, 0)
 VERT = (0, 255, 0)
 
-# Création de la fenêtre
-fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
-pygame.display.set_caption("Puissance 4")
+
 
 # Création de la grille
 grille = np.zeros((nb_lignes, nb_colonnes), dtype=int)
@@ -91,14 +91,22 @@ def changer_dernierpion(colonne):
     pygame.display.update()
 
 
+# Création de la fenêtre
+fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
+pygame.display.set_caption("Puissance 4")
+
 agent = DQNAgent(nb_colonnes,nb_colonnes)
+agent.model = charger_reseau(sys.argv[2])
+nbPartie = int(sys.argv[1])
 
 # Fonction principale du jeu
 def jouer(nb_episodes):
     compteur_win_agent = 0
     compteur_lose_agent = 0
     match_nul = 0
-    for _ in range(nb_episodes):  # Boucle pour le nombre d'épisodes spécifié
+    for i in range(nb_episodes):  # Boucle pour le nombre d'épisodes spécifié
+        if i % (nb_episodes//10) == 0:
+            print(i)
         tour = 0
         jeu_termine = False
         grille[:] = 0  # Réinitialisation de la grille
@@ -125,19 +133,19 @@ def jouer(nb_episodes):
             dessiner_grille()
 
             if victoire(1):
-                print("Agent gagne !")
+                #print("Agent gagne !")
                 jeu_termine = True
-                ia_recompense += 100
+                ia_recompense += 1000
                 compteur_win_agent = compteur_win_agent +1
                 
             elif victoire(2):
-                print("Agent a perdu !")
+                #print("Agent a perdu !")
                 jeu_termine = True
-                ia_recompense += -100
+                ia_recompense += -1000
                 compteur_lose_agent = compteur_lose_agent +1
 
             elif np.all(grille != 0):
-                print("Match nul !")
+                #print("Match nul !")
                 jeu_termine = True
                 ia_recompense += 0
                 match_nul = match_nul +1
@@ -158,9 +166,9 @@ def jouer(nb_episodes):
         # Écrire la ligne dans le fichier
         fichier.write(ligne + "\n")
                     
-nbExpAnalyse = 500
-# Lancement du jeu avec 5 parties
+
+
 if __name__ == "__main__":
-    for i in range(10):
-        jouer(nb_episodes=5000)  # Spécifiez le nombre d'épisodes à jouer ici
-        agent.replay(nbExpAnalyse)
+    jouer(nbPartie)  # Spécifiez le nombre d'épisodes à jouer ici
+    agent.replay(nbPartie//5)
+    sauvegarder_reseau(agent,sys.argv[2])
