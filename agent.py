@@ -9,9 +9,9 @@ class DQNAgent:
     def __init__(self, state_size, action_size):
         self.state_size = state_size
         self.action_size = action_size
-        self.memory = deque(maxlen=20000)  # Replay memory
+        self.memory = deque(maxlen=200)  # Replay memory
         self.gamma = 0.95  # Facteur d'escompte
-        self.epsilon = 0.1  # Probabilité qu'il joue aléatoirement :: exploration
+        self.epsilon = 1  # Probabilité qu'il joue aléatoirement :: exploration
         self.epsilon_decay = 0.995  # Taux de décroissance de l'exploration
         self.epsilon_min = 0.01  # Exploration minimale
         self.learning_rate = 0.001
@@ -47,8 +47,3 @@ class DQNAgent:
             self.model.fit(state, target_f, epochs=1, verbose=0)
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
-
-    # Fonction pour jouer un coup aléatoire
-    def jouer_coup_aleatoire(self,nb_colonnes,grille):
-        coups_valides = [col for col in range(nb_colonnes) if grille[0][col] == 0]
-        return random.choice(coups_valides)

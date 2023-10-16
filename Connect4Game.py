@@ -113,7 +113,7 @@ fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
 pygame.display.set_caption("Puissance 4")
 
 agent = DQNAgent(nb_colonnes,nb_colonnes)
-#agent.model = charger_reseau(sys.argv[2])
+agent.model.load_weights(sys.argv[2])
 nbPartie = int(sys.argv[1])
 
 # Fonction principale du jeu
@@ -153,19 +153,16 @@ def jouer(nb_episodes):
             if victoire(1):
                 #print("Agent gagne !")
                 jeu_termine = True
-                ia_recompense += 1000
                 compteur_win_agent = compteur_win_agent +1
                 
             elif victoire(2):
                 #print("Agent a perdu !")
                 jeu_termine = True
-                ia_recompense += -1000
                 compteur_lose_agent = compteur_lose_agent +1
 
             elif np.all(grille != 0):
                 #print("Match nul !")
                 jeu_termine = True
-                ia_recompense += 0
                 match_nul = match_nul +1
             
             if tour % 2 == 0:   
@@ -179,6 +176,9 @@ def jouer(nb_episodes):
 
             tour += 1
             #time.sleep(0.1)  # Délai pour voir le résultat
+
+        agent.epsilon = agent.epsilon * agent.epsilon_decay
+
     with open("avancement_IA.txt", "a") as fichier:
         ligne = "V : " + str(compteur_win_agent) + " // D : " + str(compteur_lose_agent) + " // Nul : " + str(match_nul) + " // Win Rate : " + (str(compteur_win_agent/nb_episodes))
         
@@ -190,4 +190,4 @@ def jouer(nb_episodes):
 if __name__ == "__main__":
     jouer(nbPartie)  # Spécifiez le nombre d'épisodes à jouer ici
     agent.replay(nbPartie//10)
-    sauvegarder_reseau(agent,sys.argv[2])
+    agent.model.save_weights("Agent/Agent1.h5")
