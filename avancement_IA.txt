@@ -30,3 +30,26 @@ V : 262 // D : 238 // Nul : 0
 V : 248 // D : 251 // Nul : 1
 ---Passage a 64 neurones---
 V : 241 // D : 258 // Nul : 1
+V : 103 // D : 97 // Nul : 0
+V : 97 // D : 103 // Nul : 0
+V : 965 // D : 1033 // Nul : 2
+V : 988 // D : 1011 // Nul : 1
+V : 9932 // D : 10057 // Nul : 11
+V : 9954 // D : 10035 // Nul : 11
+V : 9893 // D : 10096 // Nul : 11
+V : 9968 // D : 10016 // Nul : 16// Win Rate : 0.4984
+V : 9876 // D : 10112 // Nul : 12 // Win Rate : 0.4938
+V : 9785 // D : 10196 // Nul : 19 // Win Rate : 0.48925
+V : 9962 // D : 10029 // Nul : 9 // Win Rate : 0.4981
+V : 9994 // D : 9992 // Nul : 14 // Win Rate : 0.4997
+V : 9897 // D : 10094 // Nul : 9 // Win Rate : 0.49485
+V : 9920 // D : 10070 // Nul : 10 // Win Rate : 0.496
+V : 10060 // D : 9927 // Nul : 13 // Win Rate : 0.503
+V : 9879 // D : 10108 // Nul : 13 // Win Rate : 0.49395
+V : 0 // D : 1 // Nul : 0 // Win Rate : 0.0
+V : 1 // D : 0 // Nul : 0 // Win Rate : 1.0
+V : 1 // D : 0 // Nul : 0 // Win Rate : 1.0
+V : 9862 // D : 10126 // Nul : 12 // Win Rate : 0.4931
+V : 9862 // D : 10126 // Nul : 12 // Win Rate : 0.4931
+V : 9862 // D : 10126 // Nul : 12 // Win Rate : 0.4931
+V : 170 // D : 30 // Nul : 0 // Win Rate : 0.85

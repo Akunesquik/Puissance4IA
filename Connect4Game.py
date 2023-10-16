@@ -91,6 +91,23 @@ def changer_dernierpion(colonne):
     pygame.display.update()
 
 
+def obtenir_colonne_cliquee():
+    colonne = None
+    while colonne is None:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos_souris = pygame.mouse.get_pos()
+                colonne = pos_souris[0] // taille_case  # Convertir la position X en colonne
+                if colonne < 0 or colonne >= nb_colonnes or grille[0][colonne] != 0:
+                    colonne = None  # Le clic n'est pas valide
+    return colonne
+
+
+# Initialisation du générateur de nombres pseudo-aléatoires
+random.seed(42)
 # Création de la fenêtre
 fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
 pygame.display.set_caption("Puissance 4")
@@ -105,8 +122,9 @@ def jouer(nb_episodes):
     compteur_lose_agent = 0
     match_nul = 0
     for i in range(nb_episodes):  # Boucle pour le nombre d'épisodes spécifié
-        if i % (nb_episodes//10) == 0:
-            print(i)
+        if i >= 10:
+            if i % (nb_episodes//10) == 0:
+                print(i)
         tour = 0
         jeu_termine = False
         grille[:] = 0  # Réinitialisation de la grille
@@ -153,6 +171,7 @@ def jouer(nb_episodes):
             if tour % 2 == 0:   
                 ia_recompense += calculer_recompense(ia_prev_state,ia_action)
                 #changer_dernierpion(ia_action)
+                #print(ia_recompense)
                 ia_done = jeu_termine
                 agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
                 # Vérifiez si le nombre d'expériences dans la mémoire atteint le seuil pour appeler replay
@@ -161,7 +180,7 @@ def jouer(nb_episodes):
             tour += 1
             #time.sleep(0.1)  # Délai pour voir le résultat
     with open("avancement_IA.txt", "a") as fichier:
-        ligne = "V : " + str(compteur_win_agent) + " // D : " + str(compteur_lose_agent) + " // Nul : " + str(match_nul)
+        ligne = "V : " + str(compteur_win_agent) + " // D : " + str(compteur_lose_agent) + " // Nul : " + str(match_nul) + " // Win Rate : " + (str(compteur_win_agent/nb_episodes))
         
         # Écrire la ligne dans le fichier
         fichier.write(ligne + "\n")

@@ -81,13 +81,13 @@ def longueur_chaine_diagonale_gauche(grille, ligne, colonne):
 def recompense_longueur(longueur):
     recompense = 0
     if longueur == 1:
-        recompense = -3
+        recompense = 0
     elif longueur == 2:
         recompense = 30
     elif longueur == 3:
-        recompense = 60
+        recompense = 100
     else:
-        recompense = 500
+        recompense = 5000
     return recompense
 
 def trouver_dernier_pion(grille, colonne):
