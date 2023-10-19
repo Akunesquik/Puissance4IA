@@ -3,9 +3,9 @@ import sys
 import numpy as np
 import random
 import time
-from agent import DQNAgent
-from recompense import calculer_recompense, trouver_dernier_pion
-from sauvegarde import sauvegarder_reseau, charger_reseau
+from ..IA.agent import DQNAgent
+from ..IA.recompense import calculer_recompense, trouver_dernier_pion
+from ..IA.sauvegarde import sauvegarder_reseau, charger_reseau
 import sys
 
 # Initialisation de Pygame
