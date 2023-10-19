@@ -3,6 +3,7 @@ import pygame
 import sys
 import random
 
+# Fonction pour jouer à la souris
 def obtenir_colonne_cliquee(game):
     colonne = None
     while colonne is None:
@@ -22,6 +23,7 @@ def jouer_coup_aleatoire(game):
     coups_valides = [col for col in range(game.nb_colonnes) if game.grid[0][col] == 0]
     return random.choice(coups_valides)
 
+# Fonction pour lancer le jeu
 def main():
     game = Puissance4()
     # Initialisation de Pygame
