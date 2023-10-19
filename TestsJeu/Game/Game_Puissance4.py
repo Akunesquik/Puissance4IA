@@ -30,11 +30,13 @@ class Puissance4:
 
         return fenetre
     
+    # Reset la grille et les joueurs
     def reset(self):
         self.grid = np.zeros((self.nb_lignes, self.nb_colonnes), dtype=int)
         self.current_player = 1
         self.moves = 0
 
+    # Met le pion dans dans la colonne
     def make_move(self, colonne):
         for ligne in range(self.nb_lignes - 1, -1, -1):
             if self.grid[ligne][colonne] == 0:
@@ -43,9 +45,11 @@ class Puissance4:
                 return True
         return False  # La colonne est pleine, le coup n'est pas valide
 
+    # Change entre player 1 et 2
     def switch_player(self):
         self.current_player = 3 - self.current_player  # Alterner entre les joueurs 1 et 2
 
+    # Check si il y a un winner dans la game
     def is_winner(self):
         for joueur in [1, 2]:
             for ligne in range(self.nb_lignes):
@@ -73,6 +77,7 @@ class Puissance4:
 
         return None  # La partie n'est pas terminée
 
+    # Check si le move est valide
     def is_valid_move(self, colonne):
         return self.grid[0][colonne] == 0
 
@@ -82,6 +87,7 @@ class Puissance4:
     def get_grid(self):
         return self.grid.copy()
     
+    # Fonction pour afficher la fenetre de jeu
     def render(self,fenetre):
         for colonne in range(self.nb_colonnes):
             for ligne in range(self.nb_lignes):

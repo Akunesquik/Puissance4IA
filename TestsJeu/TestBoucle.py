@@ -1,4 +1,4 @@
-from TestsJeu.Game.Game_Puissance4 import   Puissance4
+from Game.Game_Puissance4 import Puissance4
 
 
 # Fonction pour lancer le jeu
@@ -36,4 +36,5 @@ def main():
         
 
 if __name__ == "__main__":
-    main()
+    for i in range(2):
+        main()
