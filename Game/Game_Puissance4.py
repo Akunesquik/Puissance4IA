@@ -1,6 +1,7 @@
 import numpy as np
 import pygame
-
+import random
+import sys
 
 # Couleurs
 BLEU = (0, 0, 255)
@@ -91,4 +92,25 @@ class Puissance4:
                 elif self.grid[ligne][colonne] == 2:
                     pygame.draw.circle(fenetre, JAUNE, (colonne * self.taillecase + self.taillecase // 2, (ligne + 1) * self.taillecase + self.taillecase // 2), self.rayon_jetons)
         pygame.display.update()
+
+
+    # Fonction pour jouer un coup aléatoire
+    def jouer_coup_aleatoire(self):
+        coups_valides = [col for col in range(self.nb_colonnes) if self.grid[0][col] == 0]
+        return random.choice(coups_valides)
+    
+    # Fonction pour jouer à la souris
+    def obtenir_colonne_cliquee(game):
+        colonne = None
+        while colonne is None:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pos_souris = pygame.mouse.get_pos()
+                    colonne = pos_souris[0] // game.taillecase  # Convertir la position X en colonne
+                    if colonne < 0 or colonne >= game.nb_colonnes or game.grid[0][colonne] != 0:
+                        colonne = None  # Le clic n'est pas valide
+        return colonne
 

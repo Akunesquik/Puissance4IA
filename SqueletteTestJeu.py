@@ -1,33 +1,9 @@
 from Game.Game_Puissance4 import Puissance4
-import pygame
-import sys
-import random
 
-# Fonction pour jouer à la souris
-def obtenir_colonne_cliquee(game):
-    colonne = None
-    while colonne is None:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pos_souris = pygame.mouse.get_pos()
-                colonne = pos_souris[0] // game.taillecase  # Convertir la position X en colonne
-                if colonne < 0 or colonne >= game.nb_colonnes or game.grid[0][colonne] != 0:
-                    colonne = None  # Le clic n'est pas valide
-    return colonne
-
-# Fonction pour jouer un coup aléatoire
-def jouer_coup_aleatoire(game):
-    coups_valides = [col for col in range(game.nb_colonnes) if game.grid[0][col] == 0]
-    return random.choice(coups_valides)
 
 # Fonction pour lancer le jeu
 def main():
     game = Puissance4()
-    # Initialisation de Pygame
-    pygame.init()
 
     fenetre = game.creation_fenetre()
 
@@ -36,15 +12,11 @@ def main():
         # Afficher la Fenetre
         game.render(fenetre)
 
-
         #Gere la gestion des joueurs
         if(game.get_current_player() == 1):
-            colonne = obtenir_colonne_cliquee(game)
+            colonne = game.obtenir_colonne_cliquee()
         else:
-            colonne = jouer_coup_aleatoire(game)
-
-
-
+            colonne = game.jouer_coup_aleatoire()
 
         # Si pion valide
         if game.is_valid_move(colonne):
