@@ -1,0 +1,13 @@
+Refaire la structure du projet de cette facon :
+
+1. on lance un "train"
+    le train nous demande qui joue contre qui
+    les possibilités :
+        - humain / alea / agent 1-...
+    (si l'agent(nombre) n'existe pas, alors il sera crée et sauvegardé à la fin du train)
+
+
+
+2. sauvegarder un agent pour le 17/01 
+
+https://python.hotexamples.com/examples/rl.agents.dqn/DQNAgent/load_weights/python-dqnagent-load_weights-method-examples.html
