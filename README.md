@@ -11,10 +11,11 @@ python -m virtualenv Puissance4env /// virtualenv Puissance4env
 
 Puissance4env\Scripts\activate
 
-#desactiver le virtualenv creer plus tot : deactivate
+### Desactiver le virtualenv creer plus tot : deactivate
 
 
 
 ## Packages nécessaires
 
-pip install gym numpy tensorflow pygame
+pip install -r requirements.txt
+
