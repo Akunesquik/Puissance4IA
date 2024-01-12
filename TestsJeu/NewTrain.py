@@ -1,74 +1,24 @@
 from Game.Game_Puissance4 import   Puissance4
-from IA.recompense import calculer_recompense
-from IA.agent import DQNAgent
-import sys
+from FonctionsUtiles import *
 
-def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
-    ia_done = jeu_termine
-    ia_action = colonne
-    ia_next_state = game.grid
-    ia_recompense += calculer_recompense(ia_prev_state,ia_action)
-    agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
-
-def choisir_agent(game):
-    while 1==1 :
-        agent_type = input("Choisissez le type d'agent (humain/alea/agent1/agent2) : ").lower()
-        if agent_type == 'humain':
-            return 'humain'  # Retourne None pour un joueur humain
-        elif agent_type == 'alea':
-            return 'aleatoire'  # Remplacez 'aleatoire' par le nom de votre classe d'agent aléatoire
-        elif agent_type.startswith('agent'):
-            return agent_type  # Ajoutez des paramètres au besoin
-        
-def charger_agent(game,agent_name, agent=None):
-    agent = DQNAgent(game.nb_colonnes, game.nb_colonnes)
-    agent.name= agent_name
-    # Construire le nom de fichier basé sur le nom de l'agent
-    filename = f"{agent_name}Neurone.h5"
-
-    # Charger le réseau neuronal à partir du fichier
-    try:
-        agent = DQNAgent.load_model(filename)
-        print(f"Réseau neuronal chargé pour l'agent {agent_name}")
-        
-    except FileNotFoundError:
-        print(f"Aucun fichier trouvé pour l'agent {agent_name}")
-        if agent is None:
-              # Assurez-vous de définir input_size et output_size
-            print(f"Nouvel agent créé : {agent_name}")
-    return agent  
-
-def getColonneByPlayer(game,typeJoueur,agent):
-    colonne = -1
-    if typeJoueur == 'humain':
-        colonne = game.obtenir_colonne_cliquee()
-    elif typeJoueur == 'aleatoire':
-        colonne = game.jouer_coup_aleatoire()
-    elif typeJoueur.startswith('agent'):
-        ia_prev_state = game.grid
-        colonne = agent.act(ia_prev_state)
-
-    if colonne == -1:
-        return "Erreur de choix de colonne .. Fct getColonneByPlayer"
-    
-    return colonne  
 # Fonction pour lancer le jeu
 def main():
 
+    nb_episodes = getNbEpisode()
     # Setup de la game
     game = Puissance4()
     ## Setup de l'agent en focntion de ce que demande l'utilisateur
-    typeAgent1 = choisir_agent(game=game) 
-    typeAgent2 = choisir_agent(game=game)  
+    typeAgent1 = choisir_agent() 
+    typeAgent2 = choisir_agent()  
     agent1=typeAgent1
     agent2=typeAgent2
 
     if typeAgent1.startswith('agent'):
-        agent1=charger_agent(game,typeAgent1,agent1)
+        agent1=charger_agent(game,typeAgent1)
     if typeAgent2.startswith('agent'):
-        agent2=charger_agent(game,typeAgent1,agent2)
+        agent2=charger_agent(game,typeAgent2)
 
-    nb_episodes = int(sys.argv[1])    
+      
     for i in range(nb_episodes):
         ## Setup des variables necessaire au focntionnement du training
         fenetre = game.creation_fenetre()
@@ -120,7 +70,10 @@ def main():
 
             else:
                 print("Coup invalide. Réessayez.")
-        
+
+    ### saveAgent en fonction de leur type, de si ce sont des agents quoi
+    SaveAgentSiIA(agent1,typeAgent1)
+    SaveAgentSiIA(agent2,typeAgent2)        
 
 
 
