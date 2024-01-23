@@ -18,6 +18,8 @@ def main():
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(game,typeAgent2)
 
+    win,lose,draw = 0,0,0
+
       
     for i in range(nb_episodes):
         ## Setup des variables necessaire au focntionnement du training
@@ -48,15 +50,19 @@ def main():
                 #Check de si y'a un winner dans la partie
                 winner = game.is_winner()
                 if winner:
-                    print(f"Le joueur {winner} a gagné !")
+                    # print(f"Le joueur {winner} a gagné !")
                     if(winner == 1):
-                        ia_recompense = 10000
-                    else:
                         ia_recompense = -1000
+                        lose += 1
+                    else:
+                        ia_recompense = 1000
+                        win += 1
+
                     jeu_termine = True
                 elif winner == 0:
-                    print("Match nul !")
+                    # print("Match nul !")
                     jeu_termine = True
+                    draw +=1
                 
                 #apprentissage de(s) IA(s)
                 if(game.get_current_player() == 1):
@@ -68,9 +74,10 @@ def main():
                 
                 game.switch_player()
 
-            else:
-                print("Coup invalide. Réessayez.")
-
+            # else:
+            #     print("Coup invalide. Réessayez.")
+    
+    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw)
     ### saveAgent en fonction de leur type, de si ce sont des agents quoi
     SaveAgentSiIA(agent1,typeAgent1)
     SaveAgentSiIA(agent2,typeAgent2)        

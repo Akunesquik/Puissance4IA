@@ -1,13 +1,13 @@
-from IA.recompense import calculer_recompense
+from IA.recompenseAttaquant import calculer_recompense_attaquant
 from IA.agent import DQNAgent
 from keras.models import save_model, load_model
-import sys
+import sys, os
 
 def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_done = jeu_termine
     ia_action = colonne
     ia_next_state = game.grid
-    ia_recompense += calculer_recompense(ia_prev_state,ia_action)
+    ia_recompense += calculer_recompense_attaquant(ia_prev_state,ia_action)
     agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
 
 def choisir_agent():
@@ -25,7 +25,7 @@ def charger_agent(game,agent_name):
     agent.name= agent_name
     # Construire le nom de fichier basé sur le nom de l'agent
     path = 'TestsJeu/Save_Agent/'
-    filename = f"{agent_name}Neurone.keras"
+    filename = f"{agent_name}.keras"
 
     fichier = path+filename
     # Charger le réseau neuronal à partir du fichier
@@ -71,8 +71,26 @@ def SaveAgentSiIA(agent,type):
     if type.startswith('agent'):
         # Suppose que votre DQNAgent s'appelle agent
         path = 'TestsJeu/Save_Agent/'
-        filename = f"{agent.name}Neurone.keras"
+        filename = f"{agent.name}.keras"
         fichier = path+filename
         #agent.save_weights(path+filename, overwrite=True)
         agent.model.save(fichier)
         print(f"Réseau neuronal sauvegardé pour l'agent {fichier}")
+
+
+
+def EcrireResultat(typeAgent, typeAgent2, win, lose, draw):
+    # Définir le chemin d'accès au fichier
+    fichier_resultats = f"TestsJeu/Resultats/{typeAgent}_VS_{typeAgent2}.txt"
+
+    # Vérifier si le fichier existe
+    if not os.path.exists(fichier_resultats):
+        # Créer le fichier s'il n'existe pas
+        with open(fichier_resultats, "w"):
+            pass
+
+    # Ouvrir le fichier en mode append ("a") et ajouter la ligne
+    with open(fichier_resultats, "a") as fichier:
+        ligne = typeAgent +" vs " + typeAgent2 + " V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + (str(win/(win+lose+draw)))
+        # Écrire la ligne dans le fichier
+        fichier.write(ligne + "\n")

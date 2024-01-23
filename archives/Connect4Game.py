@@ -4,7 +4,7 @@ import numpy as np
 import random
 import time
 from ..TestsJeu.IA.agent import DQNAgent
-from ..TestsJeu.IA.recompense import calculer_recompense, trouver_dernier_pion
+from ..TestsJeu.IA.recompenseAttaquant import calculer_recompense, trouver_dernier_pion
 from ..TestsJeu.IA.sauvegarde import sauvegarder_reseau, charger_reseau
 import sys
 

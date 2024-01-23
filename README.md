@@ -11,7 +11,8 @@ python -m virtualenv Puissance4env /// virtualenv Puissance4env
 
 Puissance4env\Scripts\activate
 
-### Desactiver le virtualenv creer plus tot : deactivate
+### Desactiver le virtualenv creer plus tot : 
+deactivate
 
 
 
