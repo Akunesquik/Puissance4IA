@@ -1,5 +1,5 @@
 from Game.Game_Puissance4 import   Puissance4
-from IA.recompense import calculer_recompense
+from TestsJeu.IA.recompenseAttaquant import calculer_recompense
 from IA.agent import DQNAgent
 import sys
 

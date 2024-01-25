@@ -11,7 +11,7 @@ class DQNAgent:
         self.action_size = action_size
         self.memory = deque(maxlen=200)  # Replay memory
         self.gamma = 0.95  # Facteur d'escompte
-        self.epsilon = 0  # Probabilité qu'il joue aléatoirement :: exploration
+        self.epsilon = 1  # Probabilité qu'il joue aléatoirement :: exploration
         self.epsilon_decay = 0.995  # Taux de décroissance de l'exploration
         self.epsilon_min = 0.01  # Exploration minimale
         self.learning_rate = 0.001

@@ -2,12 +2,13 @@ from IA.recompenseAttaquant import calculer_recompense_attaquant
 from IA.agent import DQNAgent
 from keras.models import save_model, load_model
 import sys, os
+import time
 
 def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_done = jeu_termine
     ia_action = colonne
     ia_next_state = game.grid
-    ia_recompense += calculer_recompense_attaquant(ia_prev_state,ia_action)
+    ia_recompense = calculer_recompense_attaquant(ia_prev_state,ia_action)
     agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
 
 def choisir_agent():

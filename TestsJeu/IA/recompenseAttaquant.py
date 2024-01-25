@@ -81,11 +81,11 @@ def longueur_chaine_diagonale_gauche(grille, ligne, colonne):
 def recompense_longueur(longueur):
     recompense = 0
     if longueur == 1:
-        recompense = 1
+        recompense = 0
     elif longueur == 2:
-        recompense = 2
+        recompense = 1
     elif longueur == 3:
-        recompense = 4
+        recompense = 3
     else:
         recompense = 50
     return recompense

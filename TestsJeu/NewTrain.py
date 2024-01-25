@@ -1,5 +1,6 @@
 from Game.Game_Puissance4 import   Puissance4
 from FonctionsUtiles import *
+import time
 
 # Fonction pour lancer le jeu
 def main():
@@ -31,7 +32,7 @@ def main():
         while jeu_termine == False:
 
             # Afficher la Fenetre
-            game.render(fenetre)
+            # game.render(fenetre)
 
             # Gere les choix joueurs
             ia_prev_state = game.grid
@@ -52,10 +53,8 @@ def main():
                 if winner:
                     # print(f"Le joueur {winner} a gagné !")
                     if(winner == 1):
-                        ia_recompense = -1000
                         lose += 1
                     else:
-                        ia_recompense = 1000
                         win += 1
 
                     jeu_termine = True
