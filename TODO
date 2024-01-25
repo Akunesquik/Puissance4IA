@@ -17,3 +17,6 @@ https://python.hotexamples.com/examples/rl.agents.dqn/DQNAgent/load_weights/pyth
 3. checker avec un nouvel environnement si charger et sauvegarder une IA fonctionne vraiment
 
     car la je crois que mes IA ont toutes la meme base car au début je sauvegardais pas mes IA mais elles ont quand meme appris, je me doute donc que il y a un "cerveau" de base inclus dans mon environnnement
+### Presque DONE
+
+4. entrainer serieuesement une IA défensive pour voir ce que ca donne vraiment avec le systeme de recompense
