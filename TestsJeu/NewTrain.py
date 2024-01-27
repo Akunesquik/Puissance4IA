@@ -24,7 +24,7 @@ def main():
       
     for i in range(nb_episodes):
         ## Setup des variables necessaire au focntionnement du training
-        fenetre = game.creation_fenetre()
+        # fenetre = game.creation_fenetre()
         jeu_termine = False
         game.reset()
 
