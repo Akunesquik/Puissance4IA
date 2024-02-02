@@ -19,8 +19,10 @@ def main():
 
     if typeAgent1.startswith('agent'):
         agent1=charger_agent(game,typeAgent1)
+        agent1.epsilon = 0
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(game,typeAgent2)
+        agent2.epsilon = 0
 
       
     for i in range(nb_episodes):
@@ -67,20 +69,7 @@ def main():
                 # print("Coup invalide. Réessayez.")      
 
     
-    # Définir le chemin d'accès au fichier
-    fichier_resultats = "TestsJeu/Resultats/testStatsAgentP1.txt"
-
-    # Vérifier si le fichier existe
-    if not os.path.exists(fichier_resultats):
-        # Créer le fichier s'il n'existe pas
-        with open(fichier_resultats, "w"):
-            pass
-
-    # Ouvrir le fichier en mode append ("a") et ajouter la ligne
-    with open(fichier_resultats, "a") as fichier:
-        ligne = typeAgent1 + " V : " + str(compteur_win_agent) + " // D : " + str(compteur_lose_agent) + " // Nul : " + str(match_nul) + " // Win Rate : " + (str(compteur_win_agent/nb_episodes))
-        # Écrire la ligne dans le fichier
-        fichier.write(ligne + "\n")
+    EcrireResultat(typeAgent1,typeAgent2,compteur_win_agent,compteur_lose_agent,match_nul)
 
 
 if __name__ == "__main__":

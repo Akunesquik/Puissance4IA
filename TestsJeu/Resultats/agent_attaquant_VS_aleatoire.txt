@@ -1,0 +1,3 @@
+agent_attaquant vs aleatoire V : 49 // D : 51 // Nul : 0 // Win Rate : 0.49
+agent_attaquant vs aleatoire V : 38 // D : 62 // Nul : 0 // Win Rate : 0.38
+agent_attaquant vs aleatoire V : 2 // D : 8 // Nul : 0 // Win Rate : 0.2

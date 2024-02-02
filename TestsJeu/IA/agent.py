@@ -9,15 +9,14 @@ class DQNAgent:
     def __init__(self, state_size, action_size):
         self.state_size = state_size
         self.action_size = action_size
-        self.memory = deque(maxlen=2000)  # Replay memory
+        self.memory = deque(maxlen=5000)  # Replay memory
         self.gamma = 0.95  # Facteur d'escompte
         self.epsilon = 1  # Probabilité qu'il joue aléatoirement :: exploration
-        self.epsilon_decay = 0.995  # Taux de décroissance de l'exploration
+        self.epsilon_decay = 0.850  # Taux de décroissance de l'exploration
         self.epsilon_min = 0.01  # Exploration minimale
         self.learning_rate = 0.001
-        self.train_start = 1000  # Number of steps before starting training
-        self.game_count = 0  # Number of games played
-        self.batch_size = 32
+        self.batch_size = 10
+        self.batch_mod = 100
         self.model = self.build_model()
 
     def build_model(self):
@@ -31,16 +30,12 @@ class DQNAgent:
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
 
-        if len(self.memory) >= self.train_start:
+        if len(self.memory) % self.batch_mod == 0:
             self.replay()
-
-        if done:
-            self.game_count += 1
-            if self.game_count % 100 == 0:
-                # After a certain number of games, reduce exploration
+        
+        if len(self.memory) % self.batch_size ==0 :
+            if self.epsilon > self.epsilon_min:
                 self.epsilon *= self.epsilon_decay
-                self.epsilon = max(self.epsilon_min, self.epsilon)
-
 
     def act(self, state):
         if np.random.rand() <= self.epsilon:
@@ -50,7 +45,7 @@ class DQNAgent:
 
     def replay(self):
         if len(self.memory) < self.batch_size:
-            return
+            return 
         minibatch = random.sample(self.memory, self.batch_size)
         for state, action, reward, next_state, done in minibatch:
             target = reward
