@@ -1,4 +1,4 @@
-from TestsJeu.Game.Game_Puissance4 import   Puissance4
+from TestsJeu.Game.Game_Puissance4 import Puissance4
 
 
 # Fonction pour lancer le jeu

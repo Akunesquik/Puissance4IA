@@ -53,9 +53,9 @@ def main():
                 if winner:
                     # print(f"Le joueur {winner} a gagné !")
                     if(winner == 1):
-                        lose += 1
-                    else:
                         win += 1
+                    else:
+                        lose += 1
 
                     jeu_termine = True
                 elif winner == 0:
