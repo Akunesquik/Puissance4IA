@@ -23,7 +23,7 @@ def main():
     win,lose,draw = 0,0,0
     ia_recompense_totale = 0
       
-    for i in range(nb_episodes):
+    for i in range(1,nb_episodes+1):
         ## Setup des variables necessaire au focntionnement du training
         # fenetre = game.creation_fenetre()
         jeu_termine = False
@@ -88,15 +88,6 @@ def main():
             SaveAgentSiIA(agent2,typeAgent2)  
             win,lose,draw = 0,0,0
             ia_recompense_totale = 0
-            
-    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,nb_episodes,mod,nb_episodes)
-    ### saveAgent en fonction de leur type, de si ce sont des agents quoi
-    SaveAgentSiIA(agent1,typeAgent1)
-    SaveAgentSiIA(agent2,typeAgent2) 
-    
-          
-
-
-
+                 
 if __name__ == "__main__":
     main()

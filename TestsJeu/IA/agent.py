@@ -5,6 +5,8 @@ from keras.layers import Dense
 from keras.optimizers import Adam
 import tensorflow as tf
 
+tf.random.set_seed(42)
+
 class DQNAgent:
     def __init__(
         self,

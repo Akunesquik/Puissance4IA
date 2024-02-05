@@ -7,6 +7,8 @@ import json
 import tensorflow as tf
 import numpy as np
 
+tf.random.set_seed(42)
+
 def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_done = jeu_termine
     ia_action = colonne
@@ -29,7 +31,7 @@ def choisir_agent():
 def charger_agent(agent_name):
     
     path='TestsJeu/Save_Agent/' 
-    pathModel = path + f'models/{agent_name}/{agent_name}.keras'
+    pathModel = path + f'models/{agent_name}'
     pathHyperpara = path + f'hyperparametres/{agent_name}.json'
     # Construire le nom de fichier basé sur le nom de l'agent
     # Charger le réseau neuronal à partir du fichier
@@ -48,7 +50,7 @@ def SaveAgentSiIA(agent,type):
     if type.startswith('agent'):
         
         path='TestsJeu/Save_Agent/' 
-        pathModel = path + f'models/{agent.name}/{agent.name}.keras'
+        pathModel = path + f'models/{agent.name}'
         pathHyperpara = path + f'hyperparametres/{agent.name}.json'
         save_agent(agent,pathModel,pathHyperpara)
 
@@ -93,11 +95,11 @@ def EcrireResultat(typeAgent, typeAgent2, win, lose, draw,recompenseTotale,i,mod
 
     # Ouvrir le fichier en mode append ("a") et ajouter la ligne
     with open(fichier_resultats, "a") as fichier:
-        ligne = typeAgent +" vs " + typeAgent2 +" Iterations de "+ str(i-mod) + " a " + str(i)+ " sur "+ str(nb_episodesTotal) + " // V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + str(win/(mod)) +" // Recompense moyenne : " + str(recompenseTotale/float(i%(mod+1))) 
+        ligne = typeAgent +" vs " + typeAgent2 +" Iterations de "+ str(i-mod+1) + " a " + str(i)+ " sur "+ str(nb_episodesTotal) + " // V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + str(win/(mod)) +" // Recompense moyenne : " + str(recompenseTotale/float(i%(mod+1))) 
         # Écrire la ligne dans le fichier
         fichier.write(ligne + "\n")
 
-def save_agent(agent, model_path, hyperparameters_path):
+def save_agent(agent ,model_path, hyperparameters_path):
     """
     Sauvegarde le modèle et les hyperparamètres d'un agent DQN.
 
@@ -133,8 +135,8 @@ def load_agent(model_path, hyperparameters_path):
     # Création d'un nouvel agent avec les hyperparamètres chargés
     agent = DQNAgent(**hyperparameters)
 
-    # Chargement du modèle
+    # Chargement du modèle complet
     agent.model = tf.keras.models.load_model(model_path)
-
+    agent.target_model = agent.model
 
     return agent
