@@ -1,0 +1,1 @@
+agent_atk vs humain V : 1 // D : 0 // Nul : 0 // Win Rate : 1.0

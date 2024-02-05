@@ -3,13 +3,15 @@ from IA.agent import DQNAgent
 from keras.models import save_model, load_model
 import sys, os
 import time
+import json
+import tensorflow as tf
 
 def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_done = jeu_termine
     ia_action = colonne
     ia_next_state = game.grid
     ia_recompense = calculer_recompense_attaquant(ia_prev_state,ia_action)
-    agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
+    agent.learn(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
 
 def choisir_agent():
     while 1==1 :
@@ -21,26 +23,22 @@ def choisir_agent():
         elif agent_type.startswith('agent'):
             return agent_type  # Ajoutez des paramètres au besoin
         
-def charger_agent(game,agent_name):
-    agent = DQNAgent(game.nb_colonnes, game.nb_colonnes)
-    agent.name= agent_name
+def charger_agent(agent_name):
+    
+    path='TestsJeu/Save_Agent/' 
+    pathModel = path + f'models/{agent_name}/{agent_name}'
+    pathHyperpara = path + f'hyperparametres/{agent_name}.json'
     # Construire le nom de fichier basé sur le nom de l'agent
-    path = 'TestsJeu/Save_Agent/'
-    filename = f"{agent_name}.keras"
-
-    fichier = path+filename
     # Charger le réseau neuronal à partir du fichier
     try:
-        ##agent.load_weights(fichier)
-        loaded_model = load_model(fichier)
-        agent.model = loaded_model
-        print(f"Réseau neuronal chargé pour l'agent {fichier}")
+        agent = load_agent(pathModel,pathHyperpara)
+        print(f"Réseau neuronal chargé pour l'agent {agent_name}")
         
     except (FileNotFoundError, OSError):
-        print(f"Aucun fichier trouvé pour l'agent {fichier}")
-        if agent is None:
-              # Assurez-vous de définir input_size et output_size
-            print(f"Nouvel agent créé : {fichier}")
+        print(f"Aucun fichier trouvé pour l'agent {agent_name}")
+        agent = DQNAgent()
+        print(f"Nouvel agent créé : {agent_name}")
+    agent.name= agent_name
     return agent  
 
 def getColonneByPlayer(game,typeJoueur,agent):
@@ -50,7 +48,7 @@ def getColonneByPlayer(game,typeJoueur,agent):
     elif typeJoueur == 'aleatoire':
         colonne = game.jouer_coup_aleatoire()
     elif typeJoueur.startswith('agent'):
-        ia_prev_state = game.grid
+        ia_prev_state = game.get_grid()
         colonne = agent.act(ia_prev_state)
 
     if colonne == -1:
@@ -70,17 +68,18 @@ def getNbEpisode():
 
 def SaveAgentSiIA(agent,type):
     if type.startswith('agent'):
-        # Suppose que votre DQNAgent s'appelle agent
-        path = 'TestsJeu/Save_Agent/'
-        filename = f"{agent.name}.keras"
-        fichier = path+filename
-        #agent.save_weights(path+filename, overwrite=True)
-        agent.model.save(fichier)
-        print(f"Réseau neuronal sauvegardé pour l'agent {fichier}")
+        
+        path='TestsJeu/Save_Agent/' 
+        pathModel = path + f'models/{agent.name}/{agent.name}'
+        pathHyperpara = path + f'hyperparametres/{agent.name}.json'
+        save_agent(agent,pathModel,pathHyperpara)
+
+        print(f"Réseau neuronal sauvegardé pour l'agent {type}")
+    
 
 
 
-def EcrireResultat(typeAgent, typeAgent2, win, lose, draw):
+def EcrireResultat(typeAgent, typeAgent2, win, lose, draw,recompenseTotale):
     # Définir le chemin d'accès au fichier
     fichier_resultats = f"TestsJeu/Resultats/{typeAgent}_VS_{typeAgent2}.txt"
 
@@ -92,6 +91,50 @@ def EcrireResultat(typeAgent, typeAgent2, win, lose, draw):
 
     # Ouvrir le fichier en mode append ("a") et ajouter la ligne
     with open(fichier_resultats, "a") as fichier:
-        ligne = typeAgent +" vs " + typeAgent2 + " V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + (str(win/(win+lose+draw)))
+        ligne = typeAgent +" vs " + typeAgent2 + " V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + (str(win/(win+lose+draw)) +"// Recompense moyenne : " + str(recompenseTotale/(win+lose+draw)) )
         # Écrire la ligne dans le fichier
         fichier.write(ligne + "\n")
+
+def save_agent(agent, model_path, hyperparameters_path):
+    """
+    Sauvegarde le modèle et les hyperparamètres d'un agent DQN.
+
+    Args:
+        agent: L'agent DQN à sauvegarder.
+        model_path: Le chemin d'accès au fichier où le modèle sera sauvegardé.
+        hyperparameters_path: Le chemin d'accès au fichier où les hyperparamètres seront sauvegardés.
+    """
+
+    # Sauvegarde du modèle
+    agent.model.save_weights(model_path)
+
+    # Sauvegarde des hyperparamètres
+    with open(hyperparameters_path, "w") as f:
+        json.dump({"learning_rate": agent.learning_rate, "gamma": agent.gamma, "epsilon": agent.epsilon}, f)
+
+def load_agent(model_path, hyperparameters_path):
+    """
+    Charge un agent DQN à partir d'un fichier de sauvegarde.
+
+    Args:
+        model_path: Le chemin d'accès au fichier où le modèle est sauvegardé.
+        hyperparameters_path: Le chemin d'accès au fichier où les hyperparamètres sont sauvegardés.
+
+    Returns:
+        Un agent DQN avec les paramètres chargés.
+    """
+
+    # Chargement du modèle
+    model = tf.keras.models.load_model(model_path)
+
+    # Chargement des hyperparamètres
+    with open(hyperparameters_path, "r") as f:
+        hyperparameters = json.load(f)
+
+    # Création d'un nouvel agent avec les hyperparamètres chargés
+    agent = DQNAgent(**hyperparameters)
+
+    # Chargement des poids du modèle dans l'agent
+    agent.model.set_weights(model.get_weights())
+
+    return agent

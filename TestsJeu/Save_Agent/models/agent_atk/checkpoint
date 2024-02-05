@@ -1,0 +1,2 @@
+model_checkpoint_path: "agent_atk"
+all_model_checkpoint_paths: "agent_atk"

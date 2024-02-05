@@ -20,19 +20,19 @@ def main():
         agent2=charger_agent(typeAgent2)
 
     win,lose,draw = 0,0,0
-    ia_recompense_totale = 0
+
       
     for i in range(nb_episodes):
         ## Setup des variables necessaire au focntionnement du training
-        # fenetre = game.creation_fenetre()
+        fenetre = game.creation_fenetre()
         jeu_termine = False
         game.reset()
 
         #Commencement de l'entrainement
         while jeu_termine == False:
-
+            
             # Afficher la Fenetre
-            # game.render(fenetre)
+            game.render(fenetre)
 
             # Gere les choix joueurs
             ia_prev_state = game.grid
@@ -71,13 +71,13 @@ def main():
                     if typeAgent2.startswith('agent'):
                         RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
                 
-                ia_recompense_totale += ia_recompense
                 game.switch_player()
+                time.sleep(0.2)
 
             # else:
             #     print("Coup invalide. Réessayez.")
     
-    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale)
+    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw)
     ### saveAgent en fonction de leur type, de si ce sont des agents quoi
     SaveAgentSiIA(agent1,typeAgent1)
     SaveAgentSiIA(agent2,typeAgent2)        
