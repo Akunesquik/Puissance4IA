@@ -66,12 +66,12 @@ def main():
                 #apprentissage de(s) IA(s)
                 if(game.get_current_player() == 1):
                     if typeAgent1.startswith('agent'):
-                        RememberAgent(game,agent1,colonne,ia_prev_state,jeu_termine,ia_recompense)
+                        ia_recompense_totale = RememberAgent(game,agent1,colonne,ia_prev_state,jeu_termine,ia_recompense)
                 else:
                     if typeAgent2.startswith('agent'):
-                        RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
+                        ia_recompense_totale = RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
                 
-                ia_recompense_totale += ia_recompense
+                
                 game.switch_player()
 
             # else:

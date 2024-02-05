@@ -1,6 +1,2 @@
-agent_atk vs aleatoire V : 2 // D : 0 // Nul : 0 // Win Rate : 1.0
-agent_atk vs aleatoire V : 1 // D : 1 // Nul : 0 // Win Rate : 0.5
-agent_atk vs aleatoire V : 8 // D : 2 // Nul : 0 // Win Rate : 0.8
-agent_atk vs aleatoire V : 6 // D : 5 // Nul : 0 // Win Rate : 0.5454545454545454
-agent_atk vs aleatoire V : 5 // D : 5 // Nul : 0 // Win Rate : 0.5
-agent_atk vs aleatoire V : 13 // D : 2 // Nul : 0 // Win Rate : 0.8666666666666667
+agent_atk vs aleatoire V : 7 // D : 3 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 0.0
+agent_atk vs aleatoire V : 9 // D : 1 // Nul : 0 // Win Rate : 0.9 // Recompense moyenne : 5.3

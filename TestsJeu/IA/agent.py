@@ -35,6 +35,7 @@ class DQNAgent:
     def _build_model(self,):
         model = tf.keras.models.Sequential()
         model.add(tf.keras.layers.Flatten())
+        model.add(tf.keras.layers.Dense(256, activation='relu'))
         model.add(tf.keras.layers.Dense(128, activation='relu'))
         model.add(tf.keras.layers.Dense(self.action_size, activation="softmax"))
 
