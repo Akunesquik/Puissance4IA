@@ -4,10 +4,10 @@ import os
 
 # Fonction pour lancer le jeu
 def main():
-
-    compteur_win_agent = 0
-    compteur_lose_agent = 0
-    match_nul = 0
+    mod = 51
+    win = 0
+    lose = 0
+    draw = 0
     nb_episodes = getNbEpisode()
     # Setup de la game
     game = Puissance4()
@@ -52,24 +52,27 @@ def main():
                 winner = game.is_winner()
                 ## Win agent
                 if winner == 1 :
-                    compteur_win_agent = compteur_win_agent+1
+                    win = win +1
                     jeu_termine = True
                 ## Lose Agent
                 elif winner == 2:
-                    compteur_lose_agent = compteur_lose_agent+1
+                    lose = lose+1
                     jeu_termine = True
                 ## Match nul
                 elif winner == 0:
-                    match_nul = match_nul+1
+                    draw = draw+1
                     jeu_termine = True
                 
                 game.switch_player()
 
             #else:
                 # print("Coup invalide. Réessayez.")      
+        if i % (mod -1) == 0:
+            EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,0,i % mod,nb_episodes)  
 
-    
-    EcrireResultat(typeAgent1,typeAgent2,compteur_win_agent,compteur_lose_agent,match_nul)
+            
+    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,0,i % mod,nb_episodes)
+
 
 
 if __name__ == "__main__":

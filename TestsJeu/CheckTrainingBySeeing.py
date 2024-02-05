@@ -20,7 +20,7 @@ def main():
         agent2=charger_agent(typeAgent2)
 
     win,lose,draw = 0,0,0
-
+    mod = 50
       
     for i in range(nb_episodes):
         ## Setup des variables necessaire au focntionnement du training
@@ -66,10 +66,10 @@ def main():
                 #apprentissage de(s) IA(s)
                 if(game.get_current_player() == 1):
                     if typeAgent1.startswith('agent'):
-                        RememberAgent(game,agent1,colonne,ia_prev_state,jeu_termine,ia_recompense)
+                        ia_recompense_totale += RememberAgent(game,agent1,colonne,ia_prev_state,jeu_termine,ia_recompense)
                 else:
                     if typeAgent2.startswith('agent'):
-                        RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
+                        ia_recompense_totale += RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
                 
                 game.switch_player()
                 time.sleep(0.2)
@@ -77,7 +77,15 @@ def main():
             # else:
             #     print("Coup invalide. Réessayez.")
     
-    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw)
+        if i % (mod) == 0:
+            print(i)
+            nbPartie = i % (mod +1)
+            EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,nbPartie,nb_episodes)  
+            ### saveAgent en fonction de leur type, de si ce sont des agents quoi
+            SaveAgentSiIA(agent1,typeAgent1)
+            SaveAgentSiIA(agent2,typeAgent2)  
+            
+    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,nbPartie,nb_episodes)
     ### saveAgent en fonction de leur type, de si ce sont des agents quoi
     SaveAgentSiIA(agent1,typeAgent1)
     SaveAgentSiIA(agent2,typeAgent2)        

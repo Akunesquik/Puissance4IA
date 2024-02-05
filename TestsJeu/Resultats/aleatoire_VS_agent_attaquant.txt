@@ -1,9 +1,0 @@
-aleatoire vs agent_attaquant V : 66 // D : 84 // Nul : 0 // Win Rate : 0.44
-aleatoire vs agent_attaquant V : 70 // D : 80 // Nul : 0 // Win Rate : 0.4666666666666667
-aleatoire vs agent_attaquant V : 13 // D : 2 // Nul : 0 // Win Rate : 0.8666666666666667
-aleatoire vs agent_attaquant V : 1 // D : 0 // Nul : 0 // Win Rate : 1.0
-aleatoire vs agent_attaquant V : 5 // D : 0 // Nul : 0 // Win Rate : 1.0
-aleatoire vs agent_attaquant V : 4 // D : 1 // Nul : 0 // Win Rate : 0.8
-aleatoire vs agent_attaquant V : 5 // D : 0 // Nul : 0 // Win Rate : 1.0
-aleatoire vs agent_attaquant V : 2 // D : 3 // Nul : 0 // Win Rate : 0.4
-aleatoire vs agent_attaquant V : 444 // D : 555 // Nul : 1 // Win Rate : 0.444

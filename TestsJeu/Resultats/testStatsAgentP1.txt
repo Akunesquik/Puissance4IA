@@ -1,3 +1,0 @@
-agent1 V : 14 // D : 6 // Nul : 0 // Win Rate : 0.7
-agent1 V : 63 // D : 37 // Nul : 0 // Win Rate : 0.63
-agent1 V : 116 // D : 83 // Nul : 1 // Win Rate : 0.58
