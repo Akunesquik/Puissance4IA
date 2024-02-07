@@ -14,9 +14,9 @@ def main():
     agent2=typeAgent2
 
     if typeAgent1.startswith('agent'):
-        agent1=charger_agent(game,typeAgent1)
+        agent1=charger_agent(typeAgent1)
     if typeAgent2.startswith('agent'):
-        agent2=charger_agent(game,typeAgent2)
+        agent2=charger_agent(typeAgent2)
 
       
     for i in range(nb_episodes):

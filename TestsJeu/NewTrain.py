@@ -16,6 +16,7 @@ def main():
 
     if typeAgent1.startswith('agent'):
         agent1=charger_agent(typeAgent1)
+        agent1.epsilon = 0.1
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(typeAgent2)
 
@@ -71,6 +72,8 @@ def main():
                 if(game.get_current_player() == 1):
                     if typeAgent1.startswith('agent'):
                         ia_recompense_totale += RememberAgent(game,agent1,colonne,ia_prev_state,jeu_termine,ia_recompense)
+                        if i % (mod) == 0 and i != 0:
+                            agent1.replay()
                 else:
                     if typeAgent2.startswith('agent'):
                         ia_recompense_totale += RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
@@ -88,6 +91,13 @@ def main():
             SaveAgentSiIA(agent2,typeAgent2)  
             win,lose,draw = 0,0,0
             ia_recompense_totale = 0
+
+    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
+    ### saveAgent en fonction de leur type, de si ce sont des agents quoi
+    SaveAgentSiIA(agent1,typeAgent1)
+    SaveAgentSiIA(agent2,typeAgent2)  
+    win,lose,draw = 0,0,0
+    ia_recompense_totale = 0
                  
 if __name__ == "__main__":
     main()

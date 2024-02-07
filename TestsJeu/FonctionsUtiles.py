@@ -12,9 +12,9 @@ tf.random.set_seed(42)
 def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_done = jeu_termine
     ia_action = colonne
-    ia_next_state = game.grid
+    ia_next_state = game.get_grid()
     ia_recompense = calculer_recompense_attaquant(ia_prev_state,ia_action)
-    agent.learn(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
+    agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
 
     return ia_recompense
 
@@ -35,14 +35,16 @@ def charger_agent(agent_name):
     pathHyperpara = path + f'hyperparametres/{agent_name}.json'
     # Construire le nom de fichier basé sur le nom de l'agent
     # Charger le réseau neuronal à partir du fichier
-    try:
+
+    if os.path.isfile(pathModel +"/saved_model.pb"):
         agent = load_agent(pathModel,pathHyperpara)
         print(f"Model chargé pour l'agent {agent_name}")
-        
-    except (FileNotFoundError, OSError):
-       print(f"Aucun fichier trouvé pour l'agent {agent_name}")
-       agent = DQNAgent()
-       print(f"Nouvel agent créé : {agent_name}")
+    
+    else:
+        print(f"Aucun fichier trouvé pour l'agent {agent_name}")
+        agent = DQNAgent()
+        print(f"Nouvel agent créé : {agent_name}")
+
     agent.name= agent_name
     return agent  
 
@@ -133,10 +135,10 @@ def load_agent(model_path, hyperparameters_path):
         hyperparameters = json.load(f)
 
     # Création d'un nouvel agent avec les hyperparamètres chargés
-    agent = DQNAgent(**hyperparameters)
+    agent = DQNAgent()
 
     # Chargement du modèle complet
+    print("Fichier trouvé")
     agent.model = tf.keras.models.load_model(model_path)
-    agent.target_model = agent.model
 
     return agent

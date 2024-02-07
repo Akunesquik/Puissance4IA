@@ -1,24 +1,15 @@
-import random
 import numpy as np
 from collections import deque
-from keras.layers import Dense
+from keras.models import Sequential
+from keras.layers import Dense, Flatten
 from keras.optimizers import Adam
 import tensorflow as tf
-
-tf.random.set_seed(42)
+import random
 
 class DQNAgent:
-    def __init__(
-        self,
-        learning_rate=0.0001,
-        gamma=0.99,
-        epsilon=0.1,
-        epsilon_decay=0.995,
-        epsilon_min=0.01,
-        memory_size=10000,
-        batch_size=32,
-        name="",
-    ):
+    def __init__(self,learning_rate=0.001, gamma=0.99, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01, memory_size=2000, batch_size=32):
+        self.state_size = (6,7)
+        self.action_size = 7
         self.learning_rate = learning_rate
         self.gamma = gamma
         self.epsilon = epsilon
@@ -26,74 +17,43 @@ class DQNAgent:
         self.epsilon_min = epsilon_min
         self.memory = deque(maxlen=memory_size)
         self.batch_size = batch_size
-        self.state_size = (7,6,3)  # Input state dimensions
-        self.action_size = 7  # Output action dimension
-        self.name = name
         self.model = self._build_model()
-        self.target_model = self._build_model()
-        self.optimizer = Adam(lr=self.learning_rate)
-        self.update_target_freq = 200
 
-    def _build_model(self,):
+    def _build_model(self):
         model = tf.keras.models.Sequential()
-        model.add(tf.keras.layers.Flatten())
+        model.add(tf.keras.layers.Input(shape=self.state_size))  # Input layer with shape (6, 7, 3)
+        model.add(tf.keras.layers.Flatten())  # Flatten the input
         model.add(tf.keras.layers.Dense(256, activation='relu'))
         model.add(tf.keras.layers.Dense(128, activation='relu'))
-        model.add(tf.keras.layers.Dense(self.action_size, activation="softmax"))
+        model.add(tf.keras.layers.Dense(self.action_size, activation='linear'))
 
-        model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+        model.compile(optimizer='adam', loss='mean_squared_error')
         return model
-    
-    def act(self, state):
-        if np.random.rand() <= self.epsilon:
-            return random.randrange(self.action_size)
-        q_values = self.model.predict(state)
-        return np.argmax(q_values) % self.action_size
-    
-    def learn(self, state, action, reward, next_state, done):
+
+    def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
-        q_target = self.target_model.predict(next_state)
-        y = reward + self.gamma * np.max(q_target) * (1 - done)
 
-        q_values = self.model.predict(state)
-        q_values[0, action] = y
+    def act(self, state):
+        state = state.reshape(1, 6, 7)  # Redimensionner l'état en (1, 6, 7) pour correspondre à la forme attendue par le modèle
+        if np.random.rand() <= self.epsilon:
+            return np.random.choice(self.action_size)
+        return np.argmax(self.model.predict(state)[0])
 
-        self.model.fit(state, q_values, epochs=1, verbose=0)
-
-        # Mise à jour du réseau cible
-        # Update target network, considering stability and transfer learning
-        self.update_target_model()
-    
-    def update_target_model(self):
-        # Soft update for stability, optionally explore hard updates
-        tau = 0.99  # Adjustment parameter
-        weights = self.model.get_weights()
-        target_weights = self.target_model.get_weights()
-        for i, (w, tw) in enumerate(zip(weights, target_weights)):
-            target_weights[i] = tau * w + (1 - tau) * tw
-        self.target_model.set_weights(target_weights)
-
-
-    ##def replay(self):
-    ##    if len(self.memory) < self.batch_size:
-    ##        return
-    ##    minibatch = random.sample(self.memory, self.batch_size)
-    ##    states, actions, rewards, next_states, done = zip(*minibatch)
-    ##    
-    ##    # One-hot encode actions for better learning (consider alternatives)
-    ##    actions_one_hot = tf.keras.utils.to_categorical(actions, self.action_size)
-
-    ##    # Predict Q-values for current states
-    ##    q_values = self.model.predict(states)
-
-    ##    # Calculate target Q-values for each action using Bellman equation
-    ##    target_q_values = rewards + self.gamma * np.max(self.target_model.predict(next_states), axis=1) * (1 - done)
-
-    ##    # Update Q-values in the minibatch for the chosen actions
-    ##    q_values[np.arange(self.batch_size), actions] = target_q_values
-
-    ##    # Fit the model on the minibatch
-    ##    self.model.fit(np.expand_dims(states, axis=0), np.expand_dims(q_values, axis=0), epochs=1, verbose=0)
-
-    ##    # Update target network, considering stability and transfer learning
-    ##    self.update_target_model()
+    def replay(self):
+        if len(self.memory) < self.batch_size:
+            return
+        minibatch = random.sample(self.memory, self.batch_size)
+        
+        # Extraire chaque élément de la mémoire
+        states = np.array([transition[0] for transition in minibatch])
+        actions = np.array([transition[1] for transition in minibatch])
+        rewards = np.array([transition[2] for transition in minibatch])
+        next_states = np.array([transition[3] for transition in minibatch])
+        dones = np.array([transition[4] for transition in minibatch])
+        
+        targets = self.model.predict(states)
+        targets[np.arange(len(targets)), actions] = rewards + self.gamma * np.max(self.model.predict(next_states), axis=1) * ~dones
+        self.model.fit(states, targets, epochs=1, verbose=0)
+        
+        if self.epsilon > self.epsilon_min:
+            self.epsilon *= self.epsilon_decay
