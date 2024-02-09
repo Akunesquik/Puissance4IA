@@ -8,7 +8,7 @@ import random
 import json
 
 class DQNAgent:
-    def __init__(self,learning_rate=0.001, gamma=0.99, epsilon=1.0, epsilon_decay=0.98, epsilon_min=0.01, memory_size=2000, batch_size=32):
+    def __init__(self,learning_rate=0.001, gamma=0.99, epsilon=1.0, epsilon_decay=0.9999, epsilon_min=0.01, memory_size=20000, batch_size=32):
         self.state_size = (6,7)
         self.action_size = 7
         self.learning_rate = learning_rate

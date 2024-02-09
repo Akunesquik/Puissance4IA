@@ -5,7 +5,6 @@ import sys, os
 import tensorflow as tf
 import numpy as np
 
-tf.random.set_seed(42)
 
 def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_done = jeu_termine
@@ -71,7 +70,7 @@ def getNbEpisode():
     return nombre
 
 
-def EcrireResultat(typeAgent, typeAgent2, win, lose, draw,recompenseTotale,i,mod,nb_episodesTotal):
+def EcrireResultat(agent, typeAgent, typeAgent2, win, lose, draw,recompenseTotale,i,mod,nb_episodesTotal):
     # Définir le chemin d'accès au fichier
     fichier_resultats = f"TestsJeu/Resultats/{typeAgent}_VS_{typeAgent2}.txt"
 
@@ -83,7 +82,7 @@ def EcrireResultat(typeAgent, typeAgent2, win, lose, draw,recompenseTotale,i,mod
 
     # Ouvrir le fichier en mode append ("a") et ajouter la ligne
     with open(fichier_resultats, "a") as fichier:
-        ligne = typeAgent +" vs " + typeAgent2 +" Iterations de "+ str(i-mod+1) + " a " + str(i)+ " sur "+ str(nb_episodesTotal) + " // V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + str(win/(mod)) +" // Recompense moyenne : " + str(recompenseTotale/float(i%(mod+1))) 
+        ligne = typeAgent +" vs " + typeAgent2 +" Iterations de "+ str(i-mod+1) + " a " + str(i)+ " sur "+ str(nb_episodesTotal) + " // V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + str(win/mod) +" // Recompense moyenne : " + str(recompenseTotale/mod) + " // Epsilon " + str(agent.epsilon) 
         # Écrire la ligne dans le fichier
         fichier.write(ligne + "\n")
 

@@ -1,16 +1,112 @@
-agent_atk vs aleatoire Iterations de 1 a 50 sur 500 // V : 24 // D : 26 // Nul : 0 // Win Rate : 0.48 // Recompense moyenne : 38.28
-agent_atk vs aleatoire Iterations de 51 a 100 sur 500 // V : 22 // D : 28 // Nul : 0 // Win Rate : 0.44 // Recompense moyenne : 36.04081632653061
-agent_atk vs aleatoire Iterations de 101 a 150 sur 500 // V : 27 // D : 23 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 41.625
-agent_atk vs aleatoire Iterations de 151 a 200 sur 500 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 46.787234042553195
-agent_atk vs aleatoire Iterations de 201 a 250 sur 500 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 50.82608695652174
-agent_atk vs aleatoire Iterations de 251 a 300 sur 500 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 51.111111111111114
-agent_atk vs aleatoire Iterations de 301 a 350 sur 500 // V : 42 // D : 8 // Nul : 0 // Win Rate : 0.84 // Recompense moyenne : 61.40909090909091
-agent_atk vs aleatoire Iterations de 1 a 50 sur 5000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 44.0
-agent_atk vs aleatoire Iterations de 51 a 100 sur 5000 // V : 28 // D : 21 // Nul : 1 // Win Rate : 0.56 // Recompense moyenne : 44.3469387755102
-agent_atk vs aleatoire Iterations de 1 a 50 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 43.6
-agent_atk vs aleatoire Iterations de 51 a 100 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 47.734693877551024
-agent_atk vs aleatoire Iterations de 101 a 150 sur 5000 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 48.104166666666664
-agent_atk vs aleatoire Iterations de 151 a 200 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 44.191489361702125
-agent_atk vs aleatoire Iterations de 201 a 250 sur 5000 // V : 42 // D : 8 // Nul : 0 // Win Rate : 0.84 // Recompense moyenne : 56.30434782608695
-agent_atk vs aleatoire Iterations de 251 a 300 sur 5000 // V : 43 // D : 7 // Nul : 0 // Win Rate : 0.86 // Recompense moyenne : 57.666666666666664
-agent_atk vs aleatoire Iterations de 301 a 350 sur 5000 // V : 46 // D : 4 // Nul : 0 // Win Rate : 0.92 // Recompense moyenne : 64.5
+agent_atk vs aleatoire Iterations de 1 a 50 sur 5000 // V : 24 // D : 26 // Nul : 0 // Win Rate : 0.48 // Recompense moyenne : 43.08
+agent_atk vs aleatoire Iterations de 51 a 100 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 45.66
+agent_atk vs aleatoire Iterations de 101 a 150 sur 5000 // V : 32 // D : 18 // Nul : 0 // Win Rate : 0.64 // Recompense moyenne : 47.48
+agent_atk vs aleatoire Iterations de 151 a 200 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 41.44
+agent_atk vs aleatoire Iterations de 201 a 250 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 46.76
+agent_atk vs aleatoire Iterations de 1 a 50 sur 5000 // V : 31 // D : 18 // Nul : 1 // Win Rate : 0.62 // Recompense moyenne : 47.76 // Epsilon 0.8170728068875467
+agent_atk vs aleatoire Iterations de 51 a 100 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 50.62 // Epsilon 0.6411706960735924
+agent_atk vs aleatoire Iterations de 101 a 150 sur 5000 // V : 23 // D : 27 // Nul : 0 // Win Rate : 0.46 // Recompense moyenne : 39.2 // Epsilon 0.5031373679776306
+agent_atk vs aleatoire Iterations de 151 a 200 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 44.02 // Epsilon 0.39482030698795667
+agent_atk vs aleatoire Iterations de 201 a 250 sur 5000 // V : 35 // D : 15 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 48.56 // Epsilon 0.3291805473947476
+agent_atk vs aleatoire Iterations de 251 a 300 sur 5000 // V : 35 // D : 15 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 47.7 // Epsilon 0.27445354472714856
+agent_atk vs aleatoire Iterations de 301 a 350 sur 5000 // V : 32 // D : 18 // Nul : 0 // Win Rate : 0.64 // Recompense moyenne : 43.86 // Epsilon 0.24808426683434853
+agent_atk vs aleatoire Iterations de 351 a 400 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 43.34 // Epsilon 0.19078235561879187
+agent_atk vs aleatoire Iterations de 401 a 450 sur 5000 // V : 42 // D : 8 // Nul : 0 // Win Rate : 0.84 // Recompense moyenne : 56.12 // Epsilon 0.14378158488770146
+agent_atk vs aleatoire Iterations de 451 a 500 sur 5000 // V : 36 // D : 14 // Nul : 0 // Win Rate : 0.72 // Recompense moyenne : 47.48 // Epsilon 0.12482046505169436
+agent_atk vs aleatoire Iterations de 501 a 550 sur 5000 // V : 37 // D : 13 // Nul : 0 // Win Rate : 0.74 // Recompense moyenne : 50.68 // Epsilon 0.10619263612744362
+agent_atk vs aleatoire Iterations de 551 a 600 sur 5000 // V : 42 // D : 8 // Nul : 0 // Win Rate : 0.84 // Recompense moyenne : 55.04 // Epsilon 0.07089505042036941
+agent_atk vs aleatoire Iterations de 601 a 650 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 44.74 // Epsilon 0.05676788948457727
+agent_atk vs aleatoire Iterations de 1 a 50 sur 5000 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 49.82 // Epsilon 0.98
+agent_atk vs aleatoire Iterations de 51 a 100 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 43.14 // Epsilon 0.9603999999999999
+agent_atk vs aleatoire Iterations de 101 a 150 sur 5000 // V : 25 // D : 25 // Nul : 0 // Win Rate : 0.5 // Recompense moyenne : 39.96 // Epsilon 0.9411919999999999
+agent_atk vs aleatoire Iterations de 151 a 200 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 47.58 // Epsilon 0.9223681599999999
+agent_atk vs aleatoire Iterations de 201 a 250 sur 5000 // V : 35 // D : 14 // Nul : 1 // Win Rate : 0.7 // Recompense moyenne : 50.7 // Epsilon 0.9039207967999998
+agent_atk vs aleatoire Iterations de 251 a 300 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 47.08 // Epsilon 0.8858423808639998
+agent_atk vs aleatoire Iterations de 301 a 350 sur 5000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 41.86 // Epsilon 0.8681255332467198
+agent_atk vs aleatoire Iterations de 351 a 400 sur 5000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 42.66 // Epsilon 0.8507630225817854
+agent_atk vs aleatoire Iterations de 401 a 450 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 45.52 // Epsilon 0.8337477621301497
+agent_atk vs aleatoire Iterations de 451 a 500 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 46.66 // Epsilon 0.8170728068875467
+agent_atk vs aleatoire Iterations de 501 a 550 sur 5000 // V : 27 // D : 23 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 43.24 // Epsilon 0.8007313507497957
+agent_atk vs aleatoire Iterations de 551 a 600 sur 5000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 44.6 // Epsilon 0.7847167237347998
+agent_atk vs aleatoire Iterations de 601 a 650 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 50.26 // Epsilon 0.7690223892601038
+agent_atk vs aleatoire Iterations de 651 a 700 sur 5000 // V : 36 // D : 14 // Nul : 0 // Win Rate : 0.72 // Recompense moyenne : 53.04 // Epsilon 0.7536419414749017
+agent_atk vs aleatoire Iterations de 701 a 750 sur 5000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 41.12 // Epsilon 0.7385691026454037
+agent_atk vs aleatoire Iterations de 751 a 800 sur 5000 // V : 29 // D : 20 // Nul : 1 // Win Rate : 0.58 // Recompense moyenne : 48.12 // Epsilon 0.7237977205924956
+agent_atk vs aleatoire Iterations de 801 a 850 sur 5000 // V : 22 // D : 28 // Nul : 0 // Win Rate : 0.44 // Recompense moyenne : 36.4 // Epsilon 0.7093217661806457
+agent_atk vs aleatoire Iterations de 851 a 900 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 44.34 // Epsilon 0.6951353308570327
+agent_atk vs aleatoire Iterations de 901 a 950 sur 5000 // V : 24 // D : 26 // Nul : 0 // Win Rate : 0.48 // Recompense moyenne : 37.14 // Epsilon 0.6812326242398921
+agent_atk vs aleatoire Iterations de 951 a 1000 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 46.5 // Epsilon 0.6676079717550942
+agent_atk vs aleatoire Iterations de 1001 a 1050 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 44.56 // Epsilon 0.6542558123199923
+agent_atk vs aleatoire Iterations de 1051 a 1100 sur 5000 // V : 35 // D : 15 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 49.12 // Epsilon 0.6411706960735924
+agent_atk vs aleatoire Iterations de 1101 a 1150 sur 5000 // V : 32 // D : 17 // Nul : 1 // Win Rate : 0.64 // Recompense moyenne : 48.08 // Epsilon 0.6283472821521205
+agent_atk vs aleatoire Iterations de 1151 a 1200 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 44.1 // Epsilon 0.6157803365090782
+agent_atk vs aleatoire Iterations de 1201 a 1250 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 48.22 // Epsilon 0.6034647297788965
+agent_atk vs aleatoire Iterations de 1251 a 1300 sur 5000 // V : 32 // D : 18 // Nul : 0 // Win Rate : 0.64 // Recompense moyenne : 47.72 // Epsilon 0.5913954351833186
+agent_atk vs aleatoire Iterations de 1301 a 1350 sur 5000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 45.56 // Epsilon 0.5795675264796523
+agent_atk vs aleatoire Iterations de 1351 a 1400 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 49.28 // Epsilon 0.5679761759500592
+agent_atk vs aleatoire Iterations de 1401 a 1450 sur 5000 // V : 25 // D : 25 // Nul : 0 // Win Rate : 0.5 // Recompense moyenne : 37.96 // Epsilon 0.5566166524310581
+agent_atk vs aleatoire Iterations de 1451 a 1500 sur 5000 // V : 36 // D : 14 // Nul : 0 // Win Rate : 0.72 // Recompense moyenne : 52.56 // Epsilon 0.5454843193824369
+agent_atk vs aleatoire Iterations de 1501 a 1550 sur 5000 // V : 27 // D : 23 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 44.3 // Epsilon 0.5345746329947881
+agent_atk vs aleatoire Iterations de 1551 a 1600 sur 5000 // V : 35 // D : 15 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 49.46 // Epsilon 0.5238831403348924
+agent_atk vs aleatoire Iterations de 1601 a 1650 sur 5000 // V : 37 // D : 13 // Nul : 0 // Win Rate : 0.74 // Recompense moyenne : 48.46 // Epsilon 0.5134054775281945
+agent_atk vs aleatoire Iterations de 1651 a 1700 sur 5000 // V : 30 // D : 19 // Nul : 1 // Win Rate : 0.6 // Recompense moyenne : 45.1 // Epsilon 0.5031373679776306
+agent_atk vs aleatoire Iterations de 1701 a 1750 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 44.7 // Epsilon 0.493074620618078
+agent_atk vs aleatoire Iterations de 1751 a 1800 sur 5000 // V : 35 // D : 15 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 48.88 // Epsilon 0.48321312820571644
+agent_atk vs aleatoire Iterations de 1801 a 1850 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 44.82 // Epsilon 0.4735488656416021
+agent_atk vs aleatoire Iterations de 1851 a 1900 sur 5000 // V : 35 // D : 14 // Nul : 1 // Win Rate : 0.7 // Recompense moyenne : 47.74 // Epsilon 0.46407788832877006
+agent_atk vs aleatoire Iterations de 1901 a 1950 sur 5000 // V : 36 // D : 14 // Nul : 0 // Win Rate : 0.72 // Recompense moyenne : 51.7 // Epsilon 0.45479633056219465
+agent_atk vs aleatoire Iterations de 1951 a 2000 sur 5000 // V : 36 // D : 14 // Nul : 0 // Win Rate : 0.72 // Recompense moyenne : 51.06 // Epsilon 0.44570040395095073
+agent_atk vs aleatoire Iterations de 2001 a 2050 sur 5000 // V : 32 // D : 18 // Nul : 0 // Win Rate : 0.64 // Recompense moyenne : 45.18 // Epsilon 0.4367863958719317
+agent_atk vs aleatoire Iterations de 2051 a 2100 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 43.06 // Epsilon 0.42805066795449304
+agent_atk vs aleatoire Iterations de 2101 a 2150 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 45.8 // Epsilon 0.41948965459540316
+agent_atk vs aleatoire Iterations de 2151 a 2200 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 49.72 // Epsilon 0.4110998615034951
+agent_atk vs aleatoire Iterations de 2201 a 2250 sur 5000 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 46.44 // Epsilon 0.4028778642734252
+agent_atk vs aleatoire Iterations de 2251 a 2300 sur 5000 // V : 38 // D : 12 // Nul : 0 // Win Rate : 0.76 // Recompense moyenne : 50.9 // Epsilon 0.39482030698795667
+agent_atk vs aleatoire Iterations de 2301 a 2350 sur 5000 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 44.62 // Epsilon 0.38692390084819756
+agent_atk vs aleatoire Iterations de 2351 a 2400 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 46.84 // Epsilon 0.3791854228312336
+agent_atk vs aleatoire Iterations de 2401 a 2450 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 44.1 // Epsilon 0.37160171437460887
+agent_atk vs aleatoire Iterations de 2451 a 2500 sur 5000 // V : 27 // D : 23 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 38.28 // Epsilon 0.3641696800871167
+agent_atk vs aleatoire Iterations de 2501 a 2550 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 44.76 // Epsilon 0.35688628648537435
+agent_atk vs aleatoire Iterations de 2551 a 2600 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 42.88 // Epsilon 0.34974856075566685
+agent_atk vs aleatoire Iterations de 2601 a 2650 sur 5000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 37.84 // Epsilon 0.3427535895405535
+agent_atk vs aleatoire Iterations de 2651 a 2700 sur 5000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 41.36 // Epsilon 0.33589851774974244
+agent_atk vs aleatoire Iterations de 2701 a 2750 sur 5000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 37.62 // Epsilon 0.3291805473947476
+agent_atk vs aleatoire Iterations de 2751 a 2800 sur 5000 // V : 25 // D : 25 // Nul : 0 // Win Rate : 0.5 // Recompense moyenne : 36.12 // Epsilon 0.32259693644685267
+agent_atk vs aleatoire Iterations de 2801 a 2850 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 44.44 // Epsilon 0.3161449977179156
+agent_atk vs aleatoire Iterations de 2851 a 2900 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 44.68 // Epsilon 0.3098220977635573
+agent_atk vs aleatoire Iterations de 2901 a 2950 sur 5000 // V : 37 // D : 13 // Nul : 0 // Win Rate : 0.74 // Recompense moyenne : 53.2 // Epsilon 0.30362565580828615
+agent_atk vs aleatoire Iterations de 2951 a 3000 sur 5000 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 47.58 // Epsilon 0.2975531426921204
+agent_atk vs aleatoire Iterations de 3001 a 3050 sur 5000 // V : 39 // D : 11 // Nul : 0 // Win Rate : 0.78 // Recompense moyenne : 53.2 // Epsilon 0.291602079838278
+agent_atk vs aleatoire Iterations de 3051 a 3100 sur 5000 // V : 35 // D : 15 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 47.78 // Epsilon 0.2857700382415124
+agent_atk vs aleatoire Iterations de 3101 a 3150 sur 5000 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 45.88 // Epsilon 0.2800546374766822
+agent_atk vs aleatoire Iterations de 3151 a 3200 sur 5000 // V : 35 // D : 15 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 47.78 // Epsilon 0.27445354472714856
+agent_atk vs aleatoire Iterations de 3201 a 3250 sur 5000 // V : 40 // D : 10 // Nul : 0 // Win Rate : 0.8 // Recompense moyenne : 55.06 // Epsilon 0.2689644738326056
+agent_atk vs aleatoire Iterations de 3251 a 3300 sur 5000 // V : 32 // D : 18 // Nul : 0 // Win Rate : 0.64 // Recompense moyenne : 47.76 // Epsilon 0.26358518435595346
+agent_atk vs aleatoire Iterations de 3301 a 3350 sur 5000 // V : 37 // D : 13 // Nul : 0 // Win Rate : 0.74 // Recompense moyenne : 54.24 // Epsilon 0.25831348066883436
+agent_atk vs aleatoire Iterations de 3351 a 3400 sur 5000 // V : 36 // D : 14 // Nul : 0 // Win Rate : 0.72 // Recompense moyenne : 49.58 // Epsilon 0.2531472110554577
+agent_atk vs aleatoire Iterations de 3401 a 3450 sur 5000 // V : 42 // D : 8 // Nul : 0 // Win Rate : 0.84 // Recompense moyenne : 55.14 // Epsilon 0.24808426683434853
+agent_atk vs aleatoire Iterations de 3451 a 3500 sur 5000 // V : 39 // D : 11 // Nul : 0 // Win Rate : 0.78 // Recompense moyenne : 50.98 // Epsilon 0.24312258149766156
+agent_atk vs aleatoire Iterations de 3501 a 3550 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 42.56 // Epsilon 0.2382601298677083
+agent_atk vs aleatoire Iterations de 3551 a 3600 sur 5000 // V : 37 // D : 13 // Nul : 0 // Win Rate : 0.74 // Recompense moyenne : 47.3 // Epsilon 0.23349492727035415
+agent_atk vs aleatoire Iterations de 3601 a 3650 sur 5000 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 47.9 // Epsilon 0.22882502872494706
+agent_atk vs aleatoire Iterations de 3651 a 3700 sur 5000 // V : 32 // D : 18 // Nul : 0 // Win Rate : 0.64 // Recompense moyenne : 43.32 // Epsilon 0.22424852815044813
+agent_atk vs aleatoire Iterations de 3701 a 3750 sur 5000 // V : 37 // D : 13 // Nul : 0 // Win Rate : 0.74 // Recompense moyenne : 50.56 // Epsilon 0.21976355758743915
+agent_atk vs aleatoire Iterations de 3751 a 3800 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 42.26 // Epsilon 0.21536828643569036
+agent_atk vs aleatoire Iterations de 3801 a 3850 sur 5000 // V : 36 // D : 14 // Nul : 0 // Win Rate : 0.72 // Recompense moyenne : 47.54 // Epsilon 0.21106092070697655
+agent_atk vs aleatoire Iterations de 3851 a 3900 sur 5000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 43.32 // Epsilon 0.20683970229283702
+agent_atk vs aleatoire Iterations de 3901 a 3950 sur 5000 // V : 38 // D : 12 // Nul : 0 // Win Rate : 0.76 // Recompense moyenne : 48.66 // Epsilon 0.20270290824698028
+agent_atk vs aleatoire Iterations de 3951 a 4000 sur 5000 // V : 34 // D : 16 // Nul : 0 // Win Rate : 0.68 // Recompense moyenne : 46.6 // Epsilon 0.19864885008204067
+agent_atk vs aleatoire Iterations de 4001 a 4050 sur 5000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 40.62 // Epsilon 0.19467587308039985
+agent_atk vs aleatoire Iterations de 4051 a 4100 sur 5000 // V : 32 // D : 17 // Nul : 1 // Win Rate : 0.64 // Recompense moyenne : 43.92 // Epsilon 0.19078235561879187
+agent_atk vs aleatoire Iterations de 4101 a 4150 sur 5000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 37.98 // Epsilon 0.18696670850641603
+agent_atk vs aleatoire Iterations de 4151 a 4200 sur 5000 // V : 25 // D : 25 // Nul : 0 // Win Rate : 0.5 // Recompense moyenne : 35.82 // Epsilon 0.18322737433628772
+agent_atk vs aleatoire Iterations de 4201 a 4250 sur 5000 // V : 32 // D : 18 // Nul : 0 // Win Rate : 0.64 // Recompense moyenne : 44.42 // Epsilon 0.17956282684956196
+agent_atk vs aleatoire Iterations de 4251 a 4300 sur 5000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 36.78 // Epsilon 0.1759715703125707
+agent_atk vs aleatoire Iterations de 4301 a 4350 sur 5000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 40.0 // Epsilon 0.1724521389063193
+agent_atk vs aleatoire Iterations de 4351 a 4400 sur 5000 // V : 22 // D : 28 // Nul : 0 // Win Rate : 0.44 // Recompense moyenne : 34.56 // Epsilon 0.16900309612819292
+agent_atk vs aleatoire Iterations de 4401 a 4450 sur 5000 // V : 22 // D : 28 // Nul : 0 // Win Rate : 0.44 // Recompense moyenne : 33.98 // Epsilon 0.16562303420562907
+agent_atk vs aleatoire Iterations de 4451 a 4500 sur 5000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 41.46 // Epsilon 0.16231057352151648
+agent_atk vs aleatoire Iterations de 4501 a 4550 sur 5000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 42.98 // Epsilon 0.15906436205108615
+agent_atk vs aleatoire Iterations de 4551 a 4600 sur 5000 // V : 35 // D : 15 // Nul : 0 // Win Rate : 0.7 // Recompense moyenne : 49.4 // Epsilon 0.15588307481006441
+agent_atk vs aleatoire Iterations de 4601 a 4650 sur 5000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 39.94 // Epsilon 0.15276541331386312
+agent_atk vs aleatoire Iterations de 4651 a 4700 sur 5000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 37.52 // Epsilon 0.14971010504758586

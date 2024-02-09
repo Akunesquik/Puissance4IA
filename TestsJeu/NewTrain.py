@@ -71,8 +71,7 @@ def main():
                 if(game.get_current_player() == 1):
                     if typeAgent1.startswith('agent'):
                         ia_recompense_totale += RememberAgent(game,agent1,colonne,ia_prev_state,jeu_termine,ia_recompense)
-                        if i % (mod) == 0 and i != 0:
-                            agent1.replay()
+                            
                 else:
                     if typeAgent2.startswith('agent'):
                         ia_recompense_totale += RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
@@ -84,12 +83,13 @@ def main():
                  compteur_loupe += 1
 
         if i % (mod) == 0 and i != 0:
+            agent1.replay()
             agent1.save_model_agent()
-            EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
+            EcrireResultat(agent1,typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
             win,lose,draw = 0,0,0
             ia_recompense_totale = 0
 
-    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes) 
+    EcrireResultat(agent1,typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes) 
     win,lose,draw = 0,0,0
     ia_recompense_totale = 0
                  
