@@ -16,7 +16,6 @@ def main():
 
     if typeAgent1.startswith('agent'):
         agent1=charger_agent(typeAgent1)
-        agent1.epsilon = 0.1
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(typeAgent2)
 
@@ -85,17 +84,12 @@ def main():
                  compteur_loupe += 1
 
         if i % (mod) == 0 and i != 0:
+            agent1.save_model_agent()
             EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
-            ### saveAgent en fonction de leur type, de si ce sont des agents quoi
-            SaveAgentSiIA(agent1,typeAgent1)
-            SaveAgentSiIA(agent2,typeAgent2)  
             win,lose,draw = 0,0,0
             ia_recompense_totale = 0
 
-    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
-    ### saveAgent en fonction de leur type, de si ce sont des agents quoi
-    SaveAgentSiIA(agent1,typeAgent1)
-    SaveAgentSiIA(agent2,typeAgent2)  
+    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes) 
     win,lose,draw = 0,0,0
     ia_recompense_totale = 0
                  

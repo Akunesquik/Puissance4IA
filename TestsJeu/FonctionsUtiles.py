@@ -2,8 +2,6 @@ from IA.recompenseAttaquant import calculer_recompense_attaquant
 from IA.agent import DQNAgent
 from keras.models import save_model, load_model
 import sys, os
-import time
-import json
 import tensorflow as tf
 import numpy as np
 
@@ -32,31 +30,19 @@ def charger_agent(agent_name):
     
     path='TestsJeu/Save_Agent/' 
     pathModel = path + f'models/{agent_name}'
-    pathHyperpara = path + f'hyperparametres/{agent_name}.json'
     # Construire le nom de fichier basé sur le nom de l'agent
     # Charger le réseau neuronal à partir du fichier
-
+    agent = DQNAgent()
+    agent.name= agent_name
     if os.path.isfile(pathModel +"/saved_model.pb"):
-        agent = load_agent(pathModel,pathHyperpara)
-        print(f"Model chargé pour l'agent {agent_name}")
+        agent.load_model_agent()
     
     else:
-        print(f"Aucun fichier trouvé pour l'agent {agent_name}")
-        agent = DQNAgent()
-        print(f"Nouvel agent créé : {agent_name}")
+        print(f"Aucun fichier trouvé pour l'agent {agent.name}")
+        agent.build_model()
+        print(f"Nouvel agent créé : {agent.name}")
 
-    agent.name= agent_name
     return agent  
-
-def SaveAgentSiIA(agent,type):
-    if type.startswith('agent'):
-        
-        path='TestsJeu/Save_Agent/' 
-        pathModel = path + f'models/{agent.name}'
-        pathHyperpara = path + f'hyperparametres/{agent.name}.json'
-        save_agent(agent,pathModel,pathHyperpara)
-
-        print(f"Model sauvegardé pour l'agent {type}")
 
 
 def getColonneByPlayer(game,typeJoueur,agent):
@@ -101,44 +87,6 @@ def EcrireResultat(typeAgent, typeAgent2, win, lose, draw,recompenseTotale,i,mod
         # Écrire la ligne dans le fichier
         fichier.write(ligne + "\n")
 
-def save_agent(agent ,model_path, hyperparameters_path):
-    """
-    Sauvegarde le modèle et les hyperparamètres d'un agent DQN.
 
-    Args:
-        agent: L'agent DQN à sauvegarder.
-        model_path: Le chemin d'accès au fichier où le modèle sera sauvegardé.
-        hyperparameters_path: Le chemin d'accès au fichier où les hyperparamètres seront sauvegardés.
-    """
 
-    # Sauvegarde du modèle
-    agent.model.save(model_path)
 
-    # Sauvegarde des hyperparamètres
-    with open(hyperparameters_path, "w") as f:
-        json.dump({"learning_rate": agent.learning_rate, "gamma": agent.gamma, "epsilon": agent.epsilon}, f)
-
-def load_agent(model_path, hyperparameters_path):
-    """
-    Charge un agent DQN à partir d'un fichier de sauvegarde.
-
-    Args:
-        model_path: Le chemin d'accès au fichier où le modèle est sauvegardé.
-        hyperparameters_path: Le chemin d'accès au fichier où les hyperparamètres sont sauvegardés.
-
-    Returns:
-        Un agent DQN avec les paramètres chargés.
-    """
-
-    # Chargement des hyperparamètres
-    with open(hyperparameters_path, "r") as f:
-        hyperparameters = json.load(f)
-
-    # Création d'un nouvel agent avec les hyperparamètres chargés
-    agent = DQNAgent()
-
-    # Chargement du modèle complet
-    print("Fichier trouvé")
-    agent.model = tf.keras.models.load_model(model_path)
-
-    return agent

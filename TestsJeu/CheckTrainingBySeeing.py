@@ -16,12 +16,14 @@ def main():
 
     if typeAgent1.startswith('agent'):
         agent1=charger_agent(typeAgent1)
+        agent1.epsilon = 0.1
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(typeAgent2)
+        agent2.epsilon = 0.1
 
     win,lose,draw = 0,0,0
     mod = 50
-      
+    ia_recompense_totale =0
     for i in range(nb_episodes):
         ## Setup des variables necessaire au focntionnement du training
         fenetre = game.creation_fenetre()
@@ -77,18 +79,10 @@ def main():
             # else:
             #     print("Coup invalide. Réessayez.")
     
-        if i % (mod) == 0:
-            print(i)
-            nbPartie = i % (mod +1)
-            EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,nbPartie,nb_episodes)  
-            ### saveAgent en fonction de leur type, de si ce sont des agents quoi
-            SaveAgentSiIA(agent1,typeAgent1)
-            SaveAgentSiIA(agent2,typeAgent2)  
+        if i % (mod) == 0 and i != 0:
+            EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes) 
             
-    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,nbPartie,nb_episodes)
-    ### saveAgent en fonction de leur type, de si ce sont des agents quoi
-    SaveAgentSiIA(agent1,typeAgent1)
-    SaveAgentSiIA(agent2,typeAgent2)        
+    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes) 
 
 
 
