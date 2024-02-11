@@ -19,7 +19,8 @@ def main():
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(typeAgent2)
 
-    mod = 50
+    mod = 500
+    modEvaluation = 5*mod
     win,lose,draw = 0,0,0
     ia_recompense_totale = 0
       
@@ -88,10 +89,9 @@ def main():
             EcrireResultat(agent1,typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
             win,lose,draw = 0,0,0
             ia_recompense_totale = 0
+        if i % (modEvaluation) == 0 and i != 0:
+            agent1.evaluate_model()
 
-    EcrireResultat(agent1,typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes) 
-    win,lose,draw = 0,0,0
-    ia_recompense_totale = 0
                  
 if __name__ == "__main__":
     main()

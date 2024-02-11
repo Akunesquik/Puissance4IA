@@ -20,3 +20,5 @@ deactivate
 
 pip install -r requirements.txt
 
+
+tensorboard --logdir logs

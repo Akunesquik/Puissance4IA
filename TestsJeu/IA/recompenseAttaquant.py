@@ -4,14 +4,14 @@ def longueur_chaine_horizontale(grille, ligne, colonne):
 
     # Recherche de l'alignement à gauche
     for i in range(colonne - 1, -1, -1):
-        if grille[ligne][i] == pion_joueur:
+        if i >= 0 and grille[ligne][i] == pion_joueur:  # Vérification de la limite de la grille
             longueur += 1
         else:
             break
 
     # Recherche de l'alignement à droite
     for i in range(colonne + 1, len(grille[0])):
-        if grille[ligne][i] == pion_joueur:
+        if i < len(grille[0]) and grille[ligne][i] == pion_joueur:  # Vérification de la limite de la grille
             longueur += 1
         else:
             break
