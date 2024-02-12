@@ -10,7 +10,7 @@ def trouver_meilleure_colonne(grille):
     for colonne in range(len(grille[0])):
         # Vérification si la colonne est jouable (il y a de la place pour un nouveau pion)
         if grille[0][colonne] == 0:
-            jouer_coup(grille,1,colonne)
+            grille = jouer_coup(grille,1,colonne)
             # Calcul de la récompense pour cette colonne
             recompense = calculer_recompense_attaquant(grille, colonne)
             # Vérification si la récompense est meilleure que la meilleure récompense actuelle
@@ -54,6 +54,14 @@ def creer_Fausses_Grilles():
 
     return grille
 
+def TrouveMeilleureActionAvecReward(next_state):
+    meilleure_action = trouver_meilleure_colonne(next_state)
+    next_state = jouer_coup(next_state,1,meilleure_action)
+    reward = calculer_recompense_attaquant(next_state, meilleure_action)
+    ligne = trouver_dernier_pion(next_state,meilleure_action)
+    next_state[ligne][meilleure_action] = 0
+
+    return meilleure_action,reward
 # Exemple d'utilisation :
 # situations = creer_situation_partie(100)
 # for i, (grille, reponse) in enumerate(situations):

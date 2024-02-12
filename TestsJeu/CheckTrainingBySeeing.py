@@ -16,7 +16,7 @@ def main():
 
     if typeAgent1.startswith('agent'):
         agent1=charger_agent(typeAgent1)
-        agent1.epsilon = 0.1
+        agent1.epsilon = 0.01
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(typeAgent2)
         agent2.epsilon = 0.1
@@ -78,11 +78,8 @@ def main():
 
             # else:
             #     print("Coup invalide. Réessayez.")
-    
-        if i % (mod) == 0 and i != 0:
-            EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes) 
             
-    EcrireResultat(typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes) 
+    #    EcrireResultat(agent1,typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
 
 
 

@@ -19,7 +19,7 @@ def main():
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(typeAgent2)
 
-    mod = 500
+    mod = 100
     modEvaluation = 5*mod
     win,lose,draw = 0,0,0
     ia_recompense_totale = 0

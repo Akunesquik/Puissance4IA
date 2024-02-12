@@ -1,12 +1,13 @@
 import numpy as np
 from collections import deque
 from keras.models import Sequential
-from keras.layers import Dense, Flatten
+from keras.layers import Dense, Flatten, Conv2D, Reshape
 from keras.optimizers import Adam
 import tensorflow as tf
 import random, time, json
 from CreationJeuDeDonneePourEvaluate import creer_situation_partie
 from datetime import datetime
+from CreationJeuDeDonneePourEvaluate import TrouveMeilleureActionAvecReward
 
 class DQNAgent:
     def __init__(self, learning_rate=0.001, gamma=0.99, epsilon=1, epsilon_decay=0.995, epsilon_min=0.01, memory_size=2000000, batch_size=32):
@@ -23,14 +24,16 @@ class DQNAgent:
         self.tensorboard = tf.keras.callbacks.TensorBoard(log_dir="logs/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S"))
 
     def build_model(self):
-        self.model = tf.keras.models.Sequential()
-        self.model.add(tf.keras.layers.Input(shape=self.state_size))  # Input layer with shape (6, 7, 3)
-        self.model.add(tf.keras.layers.Flatten())  # Flatten the input
-        self.model.add(tf.keras.layers.Dense(512, activation='relu'))
-        self.model.add(tf.keras.layers.Dense(256, activation='relu'))
-        self.model.add(tf.keras.layers.Dense(self.action_size, activation='linear'))
+        self.model = Sequential([
+            Reshape((6, 7, 1), input_shape=self.state_size),  # Reshape to add a channel dimension
+            Conv2D(64, (3, 3), activation='relu'),
+            Conv2D(32, (3, 3), activation='relu'),
+            Flatten(),
+            Dense(128, activation='relu'),
+            Dense(self.action_size, activation='softmax')
+        ])
 
-        self.model.compile(optimizer='adam', loss='mean_squared_error')
+        self.model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
@@ -53,13 +56,24 @@ class DQNAgent:
         next_states = np.array([transition[3] for transition in minibatch])
         dones = np.array([transition[4] for transition in minibatch])
         
-        targets = self.model.predict(states, verbose=0)
-        targets[np.arange(len(targets)), actions] = rewards + self.gamma * np.max(self.model.predict(next_states, verbose=0), axis=1) * ~dones
-        self.model.fit(states, targets, epochs=1, verbose=0, callbacks=[self.tensorboard])
+        # Calculer les meilleures actions et les récompenses associées pour chaque prochain état
+        meilleures_actions = []
+        nouvelles_rewards = []
+        for next_state in next_states:
+            
+            meilleure_action, reward = TrouveMeilleureActionAvecReward(next_state)
+            meilleures_actions.append(meilleure_action)
+            nouvelles_rewards.append(reward)
+        
+        meilleures_actions = np.array(meilleures_actions)
+        nouvelles_rewards = np.array(nouvelles_rewards)
+        
+        # Entraîner le modèle avec les nouvelles récompenses
+        self.model.fit(states, [meilleures_actions, nouvelles_rewards], epochs=10, verbose=0) #, callbacks=[self.tensorboard])
         
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
-            
+                
         
     def save_model_agent(self):
         path = 'TestsJeu/Save_Agent/'
@@ -105,16 +119,18 @@ class DQNAgent:
 
 
     # Méthode pour évaluer le modèle
-    def evaluate_model(self, num_episodes=100):
+    def evaluate_model(self):
+        # Chargement des données d'évaluation à partir du fichier JSON
+        with open('evaluation_data.json', 'r') as f:
+            evaluation_data = json.load(f)
+
         X_eval = []  # Liste pour stocker les états de jeu
         y_eval = []  # Liste pour stocker les réponses correctes
 
-        # Génération des données d'évaluation
-        situations = creer_situation_partie(num_episodes)
-
-        for grille, reponse in situations:
+        # Parcours des données d'évaluation chargées
+        for grille, meilleure_colonne in evaluation_data:
             X_eval.append(grille)
-            y_eval.append(reponse)
+            y_eval.append(meilleure_colonne)
 
         X_eval = np.array(X_eval)
         y_eval = np.array(y_eval)
@@ -126,5 +142,5 @@ class DQNAgent:
 
         # Ajout de la perte à TensorBoard avec un pas de temps basé sur l'heure actuelle
         current_time = int(time.time())
-        with tf.summary.create_file_writer(f"logs/eval").as_default():
+        with tf.summary.create_file_writer(f"logs/{self.name}/eval").as_default():
             tf.summary.scalar("loss", loss, step=current_time)

@@ -20,3 +20,8 @@ https://python.hotexamples.com/examples/rl.agents.dqn/DQNAgent/load_weights/pyth
 ### Presque DONE
 
 4. entrainer serieuesement une IA défensive pour voir ce que ca donne vraiment avec le systeme de recompense
+
+
+
+pip freeze > requirements.txt
+
