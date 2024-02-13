@@ -81,7 +81,16 @@ def main():
                 game.switch_player()
 
             else:
-                 compteur_loupe += 1
+                compteur_loupe += 1
+                ia_recompense = -500
+                 #apprentissage de(s) IA(s)
+                if(game.get_current_player() == 1):
+                    if typeAgent1.startswith('agent'):
+                        ia_recompense_totale += RememberAgent(game,agent1,colonne,ia_prev_state,jeu_termine,ia_recompense)
+                            
+                else:
+                    if typeAgent2.startswith('agent'):
+                        ia_recompense_totale += RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
 
         if i % (mod) == 0 and i != 0:
             agent1.replay()
