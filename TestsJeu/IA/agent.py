@@ -69,7 +69,7 @@ class DQNAgent:
         nouvelles_rewards = np.array(nouvelles_rewards)
         
         # Entraîner le modèle avec les nouvelles récompenses
-        self.model.fit(states, [meilleures_actions, nouvelles_rewards], epochs=10, verbose=0) #, callbacks=[self.tensorboard])
+        self.model.fit(states, [meilleures_actions, nouvelles_rewards], epochs=1, verbose=0) #, callbacks=[self.tensorboard])
         
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay

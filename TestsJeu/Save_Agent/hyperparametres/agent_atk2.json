@@ -1,1 +1,1 @@
-{"learning_rate": 0.001, "gamma": 0.99, "epsilon": 0.8224322824348486, "epsilon_decay": 0.995, "epsilon_min": 0.01, "memory_size": 2000000, "batch_size": 32}
+{"learning_rate": 0.001, "gamma": 0.99, "epsilon": 0.7514768435208588, "epsilon_decay": 0.995, "epsilon_min": 0.01, "memory_size": 2000000, "batch_size": 32}
