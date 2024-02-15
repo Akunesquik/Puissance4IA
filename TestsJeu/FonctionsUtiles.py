@@ -1,6 +1,6 @@
 from IA.recompenseAttaquant import calculer_recompense_attaquant
 from IA.agent import DQNAgent
-from keras.models import save_model, load_model
+
 import sys, os
 import tensorflow as tf
 import numpy as np
@@ -24,6 +24,8 @@ def choisir_agent():
             return 'aleatoire'  # Remplacez 'aleatoire' par le nom de votre classe d'agent aléatoire
         elif agent_type.startswith('agent'):
             return agent_type  # Ajoutez des paramètres au besoin
+        elif agent_type == 'minmax':
+            return agent_type
         
 def charger_agent(agent_name):
     
@@ -53,6 +55,10 @@ def getColonneByPlayer(game,typeJoueur,agent):
     elif typeJoueur.startswith('agent'):
         ia_prev_state = game.get_grid()
         colonne = agent.act(ia_prev_state)
+    elif typeJoueur == 'minmax':
+        depth = 4
+        prev_state = game.get_grid()
+        colonne , _ = game.minimax(prev_state,depth,True,2)
 
     if colonne == -1:
         return "Erreur de choix de colonne .. Fct getColonneByPlayer"
@@ -85,6 +91,38 @@ def EcrireResultat(agent, typeAgent, typeAgent2, win, lose, draw,recompenseTotal
         ligne = typeAgent +" vs " + typeAgent2 +" Iterations de "+ str(i-mod+1) + " a " + str(i)+ " sur "+ str(nb_episodesTotal) + " // V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + str(win/mod) +" // Recompense moyenne : " + str(recompenseTotale/mod) + " // Epsilon " + str(agent.epsilon) 
         # Écrire la ligne dans le fichier
         fichier.write(ligne + "\n")
+
+def is_winner(board):
+    # Vérification des lignes
+    for row in range(len(board)):
+        for col in range(len(board[0]) - 3):
+            if board[row][col] != 0 and \
+               board[row][col] == board[row][col + 1] == board[row][col + 2] == board[row][col + 3]:
+                return board[row][col]
+
+    # Vérification des colonnes
+    for col in range(len(board[0])):
+        for row in range(len(board) - 3):
+            if board[row][col] != 0 and \
+               board[row][col] == board[row + 1][col] == board[row + 2][col] == board[row + 3][col]:
+                return board[row][col]
+
+    # Vérification des diagonales (vers le bas à droite)
+    for row in range(len(board) - 3):
+        for col in range(len(board[0]) - 3):
+            if board[row][col] != 0 and \
+               board[row][col] == board[row + 1][col + 1] == board[row + 2][col + 2] == board[row + 3][col + 3]:
+                return board[row][col]
+
+    # Vérification des diagonales (vers le haut à droite)
+    for row in range(3, len(board)):
+        for col in range(len(board[0]) - 3):
+            if board[row][col] != 0 and \
+               board[row][col] == board[row - 1][col + 1] == board[row - 2][col + 2] == board[row - 3][col + 3]:
+                return board[row][col]
+
+    return 0  # Aucun gagnant
+
 
 
 

@@ -2,6 +2,7 @@ import numpy as np
 import pygame
 import random
 import sys
+from FonctionsUtiles import is_winner
 
 # Couleurs
 BLEU = (0, 0, 255)
@@ -119,4 +120,46 @@ class Puissance4:
                     if colonne < 0 or colonne >= game.nb_colonnes or game.grid[0][colonne] != 0:
                         colonne = None  # Le clic n'est pas valide
         return colonne
+
+    def minimax(self, board, depth, maximizing_player, player):
+        if depth == 0 or is_winner(board):
+            return None, 0
+
+        if maximizing_player:
+            max_eval = float('-inf')
+            best_move = None
+            for move in self.get_possible_moves(board):
+                new_board = self.get_next_state(board, move, player)
+                _, eval = self.minimax(new_board, depth - 1, False, player)
+                if eval > max_eval:
+                    max_eval = eval
+                    best_move = move
+            return best_move, max_eval
+        else:
+            min_eval = float('inf')
+            best_move = None
+            for move in self.get_possible_moves(board):
+                new_board = self.get_next_state(board, move, 3 - player)  # Autre joueur
+                _, eval = self.minimax(new_board, depth - 1, True, player)
+                if eval < min_eval:
+                    min_eval = eval
+                    best_move = move
+            return best_move, min_eval
+
+    def get_possible_moves(self,board):
+        possible_moves = []
+        for col in range(len(board[0])):
+            # Vérifiez si la colonne est pleine
+            if board[0][col] == 0:
+                possible_moves.append(col)
+        return possible_moves
+    
+    def get_next_state(self, board, move, player):
+        new_board = [row[:] for row in board]  # Crée une copie du plateau
+        for row in range(len(new_board)-1, -1, -1):
+            if new_board[row][move] == 0:
+                new_board[row][move] = player
+                break
+        return new_board
+    
 

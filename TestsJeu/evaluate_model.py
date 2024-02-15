@@ -9,14 +9,19 @@ noms_agents = os.listdir(chemin_repertoire_agents)
 
 # Parcours de chaque agent
 for nom_agent in noms_agents:
-    print(f"Évaluation de l'agent {nom_agent}...")
+        try:
 
-    # Chargez l'agent
-    agent = charger_agent(nom_agent)
+                print(f"Évaluation de l'agent {nom_agent}...")
 
-    # Évaluez l'agent
-    agent.evaluate_model()
+                # Chargez l'agent
+                agent = charger_agent(nom_agent)
 
-    # Vous pouvez enregistrer les résultats dans un fichier ou les afficher à l'écran
-    # Par exemple, pour les afficher à l'écran :
-    print("\n")  # Saut de ligne pour séparer les résultats des différents agents
+                # Évaluez l'agent
+                agent.evaluate_model()
+
+                # Vous pouvez enregistrer les résultats dans un fichier ou les afficher à l'écran
+                # Par exemple, pour les afficher à l'écran :
+                print("\n")  # Saut de ligne pour séparer les résultats des différents agents
+
+        except OSError:
+                print(f"Erreur de parsing avec l'agent {nom_agent}")

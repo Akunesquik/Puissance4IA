@@ -5,9 +5,7 @@ from keras.layers import Dense, Flatten, Conv2D, Reshape, Dropout
 from keras.optimizers import Adam
 import tensorflow as tf
 import random, time, json
-from CreationJeuDeDonneePourEvaluate import creer_situation_partie
 from datetime import datetime
-from CreationJeuDeDonneePourEvaluate import TrouveMeilleureActionAvecReward
 
 class DQNAgent:
     def __init__(self, learning_rate=None, gamma=None, epsilon=1.0, epsilon_decay=0.999, epsilon_min=None, memory_size=None, batch_size=None):
@@ -18,7 +16,7 @@ class DQNAgent:
         self.epsilon = epsilon
         self.epsilon_decay = epsilon_decay 
         self.epsilon_min = epsilon_min if epsilon_min is not None else random.uniform(0.01, 0.1)
-        self.memory_size = memory_size if memory_size is not None else random.randint(10000, 2000000)
+        self.memory_size = memory_size if memory_size is not None else 1000000
         self.batch_size = batch_size if batch_size is not None else random.randint(16, 128)
         self.memory = deque(maxlen=self.memory_size)
         self.model = Sequential()
@@ -27,10 +25,10 @@ class DQNAgent:
     def build_model(self):
         self.model = Sequential([
             Reshape((6, 7, 1), input_shape=self.state_size),  # Reshape to add a channel dimension
-            Conv2D(64, (3, 3), activation='relu'),
             Conv2D(32, (3, 3), activation='relu'),
+            Conv2D(64, (3, 3), activation='relu'),
             Flatten(),
-            Dense(128, activation='relu'),
+            Dense(512, activation='relu'),
             Dense(self.action_size, activation='linear')
         ])
 
@@ -61,9 +59,10 @@ class DQNAgent:
             target_f[0][action] = target
             states.append(state[0])
             targets.append(target_f[0])
-        self.model.fit(np.array(states), np.array(targets), epochs=1, verbose=0 )# , callbacks=[self.tensorboard])
-        if self.epsilon > self.epsilon_min:
-            self.epsilon *= self.epsilon_decay
+        self.model.fit(np.array(states), np.array(targets), epochs=10, verbose=0 )# , callbacks=[self.tensorboard])
+
+        # if self.epsilon > self.epsilon_min:
+        #     self.epsilon -= self.epsilon_decay
                 
         
     def save_model_agent(self):
@@ -130,7 +129,9 @@ class DQNAgent:
         for i in range(len(X_eval)): 
             # Evaluation du modèle
             reponseBot = self.act(X_eval[i])
-            if reponseBot == y_eval[i]: 
+            if isinstance(y_eval[i], list) and reponseBot in y_eval[i]: 
+                bonpoint += 1
+            elif reponseBot == y_eval[i]:
                 bonpoint += 1
             # else:
             #     print(X_eval[i])
