@@ -35,8 +35,8 @@ def creer_situation_partie(num_episodes):
     situations = []
     for _ in range(num_episodes):  # Générer 100 états de jeu aléatoires avec les réponses calculées
         grille_temp = creer_Fausses_Grilles()
-        reponse = trouver_meilleure_colonne(grille_temp)
-        if reponse is not None:  # Vérifie si une réponse valide a été trouvée
+        reponse = trouver_meilleure_colonne_array(grille_temp)
+        if reponse :  # Vérifie si une réponse valide a été trouvée
             situations.append((grille_temp, reponse))
     return situations
 
@@ -70,3 +70,38 @@ def TrouveMeilleureActionAvecReward(next_state):
 #     print(grille)
 #     print("Réponse (meilleure colonne à jouer) :", reponse)
 #     print()
+
+
+def trouver_meilleure_colonne_array(grille):
+    meilleures_colonnes = []  # Liste pour stocker les colonnes avec les récompenses maximales
+    meilleure_recompense = float('-inf')  # Initialisation de la meilleure récompense avec une valeur minimale
+
+    # Parcours de chaque colonne de la grille
+    for colonne in range(len(grille[0])):
+        # Vérification si la colonne est jouable (il y a de la place pour un nouveau pion)
+        if grille[0][colonne] == 0:
+            grille = jouer_coup(grille,1,colonne)
+            # Calcul de la récompense pour cette colonne
+            recompense = calculer_recompense_attaquant(grille, colonne)
+            # Vérification si la récompense est meilleure que la meilleure récompense actuelle
+            if recompense > meilleure_recompense:
+                meilleures_colonnes = [colonne]  # Remplacer les meilleures colonnes précédentes
+                meilleure_recompense = recompense
+            elif recompense == meilleure_recompense:
+                meilleures_colonnes.append(colonne)  # Ajouter cette colonne aux meilleures colonnes
+            ligne = trouver_dernier_pion(grille,colonne)
+            grille[ligne][colonne] = 0
+            
+    return meilleures_colonnes
+
+
+# import json
+# # Utilisez la fonction creer_situation_partie pour générer les données
+# situations = creer_situation_partie(100)
+# 
+# # Convertissez les tableaux NumPy en listes Python
+# situations_converted = [(grille.tolist(), reponse) for grille, reponse in situations]
+# 
+# # Enregistrez les données dans un fichier JSON
+# with open('meilleures_colonnes.json', 'w') as f:
+#     json.dump(situations_converted, f)

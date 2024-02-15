@@ -130,21 +130,19 @@ class DQNAgent:
         for i in range(len(X_eval)): 
             # Evaluation du modèle
             reponseBot = self.act(X_eval[i])
-            if reponseBot != y_eval[i]: 
-                print(X_eval[i])
-                print(f"Act Bot {reponseBot + 1}")
-                print(f"Bonne reponse {y_eval[i] +1}" )
-            else:
+            if reponseBot == y_eval[i]: 
                 bonpoint += 1
-        
-        print()
+            # else:
+            #     print(X_eval[i])
+            #     print(f"Act Bot {reponseBot + 1}")
+            #     print(f"Bonne reponse {y_eval[i] +1}" )
         print(f"Nombre bonne reponse {bonpoint} / {len(X_eval)}")
 
         loss = self.model.evaluate(X_eval, y_eval, verbose=0)
 
-        print("Loss:", loss)
+        #print("Loss:", loss)
 
         # Ajout de la perte à TensorBoard avec un pas de temps basé sur l'heure actuelle
         current_time = int(time.time())
         with tf.summary.create_file_writer(f"logs/{self.name}/eval").as_default():
-            tf.summary.scalar("score", score, step=current_time)
+            tf.summary.scalar("score", bonpoint, step=current_time)
