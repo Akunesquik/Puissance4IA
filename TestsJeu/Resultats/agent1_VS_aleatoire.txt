@@ -1,0 +1,9 @@
+agent1 vs aleatoire Iterations de 1 a 100 sur 10000 // V : 52 // D : 48 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 55.97 // Epsilon 1.0
+agent1 vs aleatoire Iterations de 1 a 100 sur 10000 // V : 51 // D : 49 // Nul : 0 // Win Rate : 0.51 // Recompense moyenne : 56.94 // Epsilon 1.0
+agent1 vs aleatoire Iterations de 101 a 200 sur 10000 // V : 52 // D : 48 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 52.33 // Epsilon 1.0
+agent1 vs aleatoire Iterations de 201 a 300 sur 10000 // V : 48 // D : 51 // Nul : 1 // Win Rate : 0.48 // Recompense moyenne : 53.07 // Epsilon 1.0
+agent1 vs aleatoire Iterations de 301 a 400 sur 10000 // V : 50 // D : 48 // Nul : 2 // Win Rate : 0.5 // Recompense moyenne : 56.86 // Epsilon 1.0
+agent1 vs aleatoire Iterations de 401 a 500 sur 10000 // V : 47 // D : 53 // Nul : 0 // Win Rate : 0.47 // Recompense moyenne : 46.66 // Epsilon 1.0
+agent1 vs aleatoire Iterations de 501 a 600 sur 10000 // V : 57 // D : 43 // Nul : 0 // Win Rate : 0.57 // Recompense moyenne : 56.89 // Epsilon 1.0
+agent1 vs aleatoire Iterations de 601 a 700 sur 10000 // V : 61 // D : 39 // Nul : 0 // Win Rate : 0.61 // Recompense moyenne : 58.94 // Epsilon 1.0
+agent1 vs aleatoire Iterations de 701 a 800 sur 10000 // V : 59 // D : 41 // Nul : 0 // Win Rate : 0.59 // Recompense moyenne : 59.05 // Epsilon 1.0

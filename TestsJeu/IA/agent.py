@@ -17,19 +17,17 @@ class DQNAgent:
         self.epsilon_decay = epsilon_decay 
         self.epsilon_min = epsilon_min if epsilon_min is not None else random.uniform(0.01, 0.1)
         self.memory_size = memory_size if memory_size is not None else 1000000
-        self.batch_size = batch_size if batch_size is not None else random.randint(16, 128)
+        self.batch_size = batch_size if batch_size is not None else random.randint(16, 32)
         self.memory = deque(maxlen=self.memory_size)
         self.model = Sequential()
         self.tensorboard = tf.keras.callbacks.TensorBoard(log_dir="logs/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S"))
 
     def build_model(self):
         self.model = Sequential([
-            Reshape((6, 7, 1), input_shape=self.state_size),  # Reshape to add a channel dimension
-            Conv2D(32, (3, 3), activation='relu'),
-            Conv2D(64, (3, 3), activation='relu'),
-            Flatten(),
-            Dense(512, activation='relu'),
-            Dense(self.action_size, activation='linear')
+            Flatten(input_shape=self.state_size),  # Flatten the input grid
+            Dense(128, activation='relu'),  # Add a dense layer with 128 units and ReLU activation
+            Dense(64, activation='relu'),   # Add another dense layer with 64 units and ReLU activation
+            Dense(self.action_size, activation='linear')  # Output layer with linear activation
         ])
 
         self.model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss='mse') 
@@ -38,13 +36,12 @@ class DQNAgent:
         self.memory.append((state, action, reward, next_state, done))
 
     def act(self, state):
-        state = state.reshape(1, 6, 7)  # Redimensionner l'état en (1, 6, 7) pour correspondre à la forme attendue par le modèle
         if np.random.rand() <= self.epsilon:
             return np.random.randint(self.action_size)
-        q_values = self.model.predict(state,verbose=0)
+        q_values = self.model.predict(state, verbose=0)
         return np.argmax(q_values[0])
 
-    def replay(self):
+    def replay2(self):
         if len(self.memory) < self.batch_size:
             return
         minibatch = random.sample(self.memory, self.batch_size)
@@ -58,13 +55,46 @@ class DQNAgent:
             target_f = self.model.predict(state,verbose=0)
             target_f[0][action] = target
             states.append(state[0])
+            print(state)
             targets.append(target_f[0])
         self.model.fit(np.array(states), np.array(targets), epochs=10, verbose=0 )# , callbacks=[self.tensorboard])
 
         # if self.epsilon > self.epsilon_min:
         #     self.epsilon -= self.epsilon_decay
-                
+
+    def replay(self):            
+        if len(self.memory) < self.batch_size:
+            return
+
+        minibatch = random.sample(self.memory, self.batch_size)
+        states, targets = [], []
+
+        for state, action, reward, next_state, done in minibatch:
+            state = state.reshape(1, 6, 7)
+            next_state = next_state.reshape(1, 6, 7) 
+            target = reward
+
+            if not done:
+                target = (reward + self.gamma * np.amax(self.model.predict(next_state,verbose=0)[0]))
+
+            target_f = self.model.predict(state,verbose=0)
+            target_f[0][action] = target
+
+            states.append(state[0])
+            targets.append(target_f[0])
+
+        states = np.array(states)
+        targets = np.array(targets)
+
+        with tf.GradientTape() as tape:
+            predictions = self.model(states)
+            loss = tf.keras.losses.mean_squared_error(targets, predictions)
         
+        grads = tape.gradient(loss, self.model.trainable_variables)
+        self.model.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
+
+        return loss  
+    
     def save_model_agent(self):
         path = 'TestsJeu/Save_Agent/'
         pathModel = path + f'models/{self.name}'
