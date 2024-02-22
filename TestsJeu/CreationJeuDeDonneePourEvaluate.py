@@ -45,7 +45,7 @@ def creer_Fausses_Grilles():
     grille = np.zeros((6, 7), dtype=int)
     joueur = 1  # Le joueur qui commence
 
-    for _ in range(random.randint(5, 30)):  # Générer un nombre aléatoire de coups entre 5 et 30
+    for _ in range(random.randint(3, 20)):  # Générer un nombre aléatoire de coups entre 5 et 30
         colonne = random.randint(0, 6)
         while grille[0][colonne] != 0:  # Assurez-vous qu'il y a de la place dans la colonne choisie
             colonne = random.randint(0, 6)

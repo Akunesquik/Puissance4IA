@@ -1,2 +1,0 @@
-agentdqn vs aleatoire Iterations de 1 a 100 sur 10000 // V : 76 // D : 24 // Nul : 0 // Win Rate : 0.76 // Recompense moyenne : 397.05 // Epsilon 0.0010000000000000009
-agentdqn vs aleatoire Iterations de 101 a 200 sur 10000 // V : 74 // D : 26 // Nul : 0 // Win Rate : 0.74 // Recompense moyenne : 682.97 // Epsilon 0.0010000000000000009

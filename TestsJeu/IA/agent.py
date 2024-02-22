@@ -6,9 +6,10 @@ from keras.optimizers import Adam
 import tensorflow as tf
 import random, time, json
 from datetime import datetime
+from CreationJeuDeDonneePourEvaluate import trouver_meilleure_colonne_array
 
 class DQNAgent:
-    def __init__(self, learning_rate=None, gamma=None, epsilon=1.0, epsilon_decay=0.999, epsilon_min=None, memory_size=None, batch_size=None):
+    def __init__(self, learning_rate=None, gamma=None, epsilon=1.0, epsilon_decay=0.999, epsilon_min=None, memory_size=None, batch_size=16):
         self.state_size = (6, 7)
         self.action_size = 7
         self.learning_rate = learning_rate if learning_rate is not None else random.uniform(1e-5, 1e-1)
@@ -27,10 +28,30 @@ class DQNAgent:
             Flatten(input_shape=self.state_size),  # Flatten the input grid
             Dense(128, activation='relu'),  # Add a dense layer with 128 units and ReLU activation
             Dense(64, activation='relu'),   # Add another dense layer with 64 units and ReLU activation
-            Dense(self.action_size, activation='linear')  # Output layer with linear activation
+            Dense(self.action_size, activation='linear')  # Output layer with softmax activation
         ])
 
-        self.model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss='mse') 
+
+    def compile_model(self,lossFunction):
+        if lossFunction == "custom":
+            lossFunc = "custom"
+            self.model.compile(optimizer='adam', loss=lossFunc)
+        else:
+            self.model.compile(optimizer='adam', loss="squared_hinge")
+            #  Mean Squared Error (MSE) Loss: tf.keras.losses.mean_squared_error
+            #  Mean Absolute Error (MAE) Loss: tf.keras.losses.mean_absolute_error
+            #  Binary Crossentropy Loss: tf.keras.losses.binary_crossentropy
+            #  Categorical Crossentropy Loss: tf.keras.losses.categorical_crossentropy
+            #  Sparse Categorical Crossentropy Loss: tf.keras.losses.sparse_categorical_crossentropy
+            #  Hinge Loss: tf.keras.losses.hinge
+            #  Squared Hinge Loss: tf.keras.losses.squared_hinge
+            #  Huber Loss: tf.keras.losses.huber
+            #  Log Cosh Loss: tf.keras.losses.log_cosh
+            #  Poisson Loss: tf.keras.losses.poisson
+            #  Kullback-Leibler Divergence Loss: tf.keras.losses.kullback_leibler_divergence
+            #  Cosine Similarity Loss: tf.keras.losses.cosine_similarity
+
+        #self.model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss='mse') 
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
@@ -93,11 +114,38 @@ class DQNAgent:
         grads = tape.gradient(loss, self.model.trainable_variables)
         self.model.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
 
+        
+        # Effacer la mémoire après le replay
+        self.memory.clear()
+
         return loss  
     
+    # Replay avec la fonction de perte personnalisée
+    def replay3(self):
+        if len(self.memory) < self.batch_size:
+            return
+        minibatch = random.sample(self.memory, self.batch_size)
+        states, optimal_moves = [], []
+
+        for state, action, reward, next_state, done in minibatch:
+            state = state.reshape(1, 6, 7)
+            states.append(state[0])
+            optimals_moves = trouver_meilleure_colonne_array(state[0])
+            optimal_moves.append(optimals_moves)
+
+        # Convertir optimal_moves en un format compatible avec la fonction de perte
+        optimal_moves_array = np.zeros((len(optimal_moves), 7))
+        for i, moves in enumerate(optimal_moves):
+            optimal_moves_array[i, moves] = 1
+
+        train_dataset = tf.data.Dataset.from_tensor_slices((states, optimal_moves_array))
+        train_dataset = train_dataset.shuffle(self.memory_size).batch(self.batch_size)
+        history  = self.model.fit(train_dataset, epochs=10, verbose=0 )# , callbacks=[self.tensorboard])
+        loss = history.history['loss'][-1]
+
     def save_model_agent(self):
         path = 'TestsJeu/Save_Agent/'
-        pathModel = path + f'models/{self.name}'
+        pathModel = path + f'models/{self.name}.keras'
         pathHyperpara = path + f'hyperparametres/{self.name}.json'
 
         # Save hyperparameters to JSON
@@ -119,7 +167,7 @@ class DQNAgent:
 
     def load_model_agent(self):
         path = 'TestsJeu/Save_Agent/'
-        pathModel = path + f'models/{self.name}'
+        pathModel = path + f'models/{self.name}.keras'
         pathHyperpara = path + f'hyperparametres/{self.name}.json'
 
         # Load hyperparameters from JSON
@@ -136,6 +184,7 @@ class DQNAgent:
         # Load model
         self.model = tf.keras.models.load_model(pathModel)
         print(f"Model loaded for {self.name}")
+        self.compile_model("")
 
 
     # Méthode pour évaluer le modèle
@@ -177,3 +226,6 @@ class DQNAgent:
         current_time = int(time.time())
         with tf.summary.create_file_writer(f"logs/{self.name}/eval").as_default():
             tf.summary.scalar("score", bonpoint, step=current_time)
+
+
+    

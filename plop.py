@@ -1,19 +1,16 @@
-import json
+import tensorflow as tf
 
-from CreationJeuDeDonneePourEvaluate import creer_situation_partie, trouver_meilleure_colonne
-from datetime import datetime
+# Définition de la fonction de perte personnalisée
+def custom_loss(y_true, y_pred):
+    # Comparaison entre les prédictions et les vraies étiquettes
+    incorrect_predictions = tf.cast(tf.not_equal(tf.round(y_pred), tf.cast(y_true, dtype=tf.float32)), dtype=tf.float32)
+    
+    # Retourner 1 pour les prédictions incorrectes et 0 pour les prédictions correctes
+    return incorrect_predictions
 
-# Génération des données d'évaluation
-situations = creer_situation_partie(100)
+# Test de la fonction de perte personnalisée
+y_true = tf.constant([0., 1., 1., 0.])  # Vraies étiquettes
+y_pred = tf.constant([0.2, 0.8, 0.6, 0.3])  # Prédictions du modèle
 
-# Liste pour stocker les grilles avec les meilleures réponses
-data = []
-
-# Collecte des données d'évaluation
-for grille, reponse in situations:
-    meilleure_colonne = trouver_meilleure_colonne(grille)
-    data.append((grille.tolist(), meilleure_colonne))
-
-# Enregistrement des données dans un fichier JSON
-with open('evaluation_data.json', 'w') as f:
-    json.dump(data, f)
+loss = custom_loss(y_true, y_pred)
+print(loss.numpy())  

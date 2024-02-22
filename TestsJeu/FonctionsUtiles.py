@@ -5,7 +5,6 @@ import sys, os
 import tensorflow as tf
 import numpy as np
 
-
 def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_done = jeu_termine
     ia_action = colonne
@@ -30,17 +29,18 @@ def choisir_agent():
 def charger_agent(agent_name):
     
     path='TestsJeu/Save_Agent/' 
-    pathModel = path + f'models/{agent_name}'
+    pathModel = path + f'models/{agent_name}.keras'
     # Construire le nom de fichier basé sur le nom de l'agent
     # Charger le réseau neuronal à partir du fichier
     agent = DQNAgent()
     agent.name= agent_name
-    if os.path.isfile(pathModel +"/saved_model.pb"):
+    if os.path.isfile(pathModel):
         agent.load_model_agent()
     
     else:
         print(f"Aucun fichier trouvé pour l'agent {agent.name}")
         agent.build_model()
+        agent.compile_model("")
         print(f"Nouvel agent créé : {agent.name}")
 
     return agent  

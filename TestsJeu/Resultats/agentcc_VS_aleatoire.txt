@@ -1,0 +1,5 @@
+agentcc vs aleatoire Iterations de 1 a 100 sur 100000 // V : 58 // D : 42 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 58.36 // Epsilon 1.0
+agentcc vs aleatoire Iterations de 101 a 200 sur 100000 // V : 50 // D : 50 // Nul : 0 // Win Rate : 0.5 // Recompense moyenne : 55.01 // Epsilon 1.0
+agentcc vs aleatoire Iterations de 201 a 300 sur 100000 // V : 49 // D : 51 // Nul : 0 // Win Rate : 0.49 // Recompense moyenne : 54.51 // Epsilon 1.0
+agentcc vs aleatoire Iterations de 301 a 400 sur 100000 // V : 53 // D : 47 // Nul : 0 // Win Rate : 0.53 // Recompense moyenne : 55.33 // Epsilon 1.0
+agentcc vs aleatoire Iterations de 401 a 500 sur 100000 // V : 58 // D : 42 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 54.09 // Epsilon 1.0
