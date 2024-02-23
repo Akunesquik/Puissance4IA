@@ -83,11 +83,11 @@ def recompense_longueur(longueur):
     if longueur == 1:
         recompense = 0
     elif longueur == 2:
-        recompense = 2
+        recompense = 3
     elif longueur == 3:
-        recompense = 5
+        recompense = 7
     else:
-        recompense = 50
+        recompense = 500
     return recompense
 
 def trouver_dernier_pion(grille, colonne):

@@ -1,9 +1,10 @@
 from IA.recompenseAttaquant import calculer_recompense_attaquant
 from IA.agent import DQNAgent
-
+from CreationJeuDeDonneePourEvaluate import trouver_meilleure_colonne_array, jouer_coup
 import sys, os
 import tensorflow as tf
 import numpy as np
+import time
 
 def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_done = jeu_termine
@@ -122,6 +123,24 @@ def is_winner(board):
                 return board[row][col]
 
     return 0  # Aucun gagnant
+
+
+def afficherBestMoves(game,fenetre,colonne,typeBestMove):
+    tmpgrid = game.get_grid()
+    bestColonne = trouver_meilleure_colonne_array(game.get_grid(),game.get_current_player(),typeBestMove)
+    
+    for colonnes in bestColonne :
+        if colonne == colonnes:
+            tmpgrid = jouer_coup(tmpgrid,4,colonnes)
+        else:
+            tmpgrid = jouer_coup(tmpgrid,3,colonnes)
+
+    if not(colonne in bestColonne):
+        tmpgrid = jouer_coup(tmpgrid,5,colonne)
+ 
+
+    game.render(fenetre,tmpgrid)
+    time.sleep(2)
 
 
 

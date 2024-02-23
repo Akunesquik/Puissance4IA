@@ -10,6 +10,8 @@ ROUGE = (255, 0, 0)
 JAUNE = (255, 255, 0)
 NOIR = (0, 0, 0)
 VERT = (0, 255, 0)
+CYAN = (0, 255, 255)
+VIOLET = (255, 0, 255)
 
 class Puissance4:
     def __init__(self, nb_lignes=6, nb_colonnes=7):
@@ -89,15 +91,21 @@ class Puissance4:
         return self.grid.copy()
     
     # Fonction pour afficher la fenetre de jeu
-    def render(self,fenetre):
+    def render(self,fenetre,grille):
         for colonne in range(self.nb_colonnes):
             for ligne in range(self.nb_lignes):
                 pygame.draw.rect(fenetre, BLEU, (colonne * self.taillecase, (ligne + 1) * self.taillecase, self.taillecase, self.taillecase))
                 pygame.draw.circle(fenetre, NOIR, (int(colonne*self.taillecase+self.taillecase/2), int(ligne*self.taillecase+self.taillecase+self.taillecase/2)), self.rayon_jetons)
-                if self.grid[ligne][colonne] == 1:
+                if grille[ligne][colonne] == 1:
                     pygame.draw.circle(fenetre, ROUGE, (colonne * self.taillecase + self.taillecase // 2, (ligne + 1) * self.taillecase + self.taillecase // 2), self.rayon_jetons)
-                elif self.grid[ligne][colonne] == 2:
+                elif grille[ligne][colonne] == 2:
                     pygame.draw.circle(fenetre, JAUNE, (colonne * self.taillecase + self.taillecase // 2, (ligne + 1) * self.taillecase + self.taillecase // 2), self.rayon_jetons)
+                elif grille[ligne][colonne] == 3:
+                    pygame.draw.circle(fenetre, VERT, (colonne * self.taillecase + self.taillecase // 2, (ligne + 1) * self.taillecase + self.taillecase // 2), self.rayon_jetons)
+                elif grille[ligne][colonne] == 4:
+                    pygame.draw.circle(fenetre, CYAN, (colonne * self.taillecase + self.taillecase // 2, (ligne + 1) * self.taillecase + self.taillecase // 2), self.rayon_jetons)
+                elif grille[ligne][colonne] == 5:
+                    pygame.draw.circle(fenetre, VIOLET, (colonne * self.taillecase + self.taillecase // 2, (ligne + 1) * self.taillecase + self.taillecase // 2), self.rayon_jetons)
         pygame.display.update()
 
 

@@ -1,4 +1,6 @@
 from IA.recompenseAttaquant import calculer_recompense_attaquant, trouver_dernier_pion
+from IA.recompenseDeffenseur import calculer_recompense_defenseur
+from IA.recompenseAvancee import ajout_recompense_avancee
 import numpy as np
 import random
 
@@ -72,17 +74,35 @@ def TrouveMeilleureActionAvecReward(next_state):
 #     print()
 
 
-def trouver_meilleure_colonne_array(grille):
+def trouver_meilleure_colonne_array(grille,joueur,typeBestMove):
     meilleures_colonnes = []  # Liste pour stocker les colonnes avec les récompenses maximales
     meilleure_recompense = float('-inf')  # Initialisation de la meilleure récompense avec une valeur minimale
 
     # Parcours de chaque colonne de la grille
     for colonne in range(len(grille[0])):
+        recompense = 0
         # Vérification si la colonne est jouable (il y a de la place pour un nouveau pion)
         if grille[0][colonne] == 0:
-            grille = jouer_coup(grille,1,colonne)
+            grille = jouer_coup(grille,joueur,colonne)
             # Calcul de la récompense pour cette colonne
-            recompense = calculer_recompense_attaquant(grille, colonne)
+            if(typeBestMove == "atk"):
+                recompense = calculer_recompense_attaquant(grille, colonne)               
+            elif(typeBestMove == "def"):
+                recompense = calculer_recompense_defenseur(grille, colonne)
+            elif(typeBestMove == "avc"):
+                recompense = ajout_recompense_avancee(grille, colonne)
+            elif(typeBestMove == "atkavc"):
+                recompense += calculer_recompense_attaquant(grille, colonne)
+                recompense += ajout_recompense_avancee(grille, colonne)
+            elif(typeBestMove == "defavc"):
+                recompense += calculer_recompense_defenseur(grille, colonne)
+                recompense += ajout_recompense_avancee(grille, colonne)
+            elif(typeBestMove == "all"):
+                recompense += calculer_recompense_attaquant(grille, colonne)
+                recompense += calculer_recompense_defenseur(grille, colonne)
+                recompense += ajout_recompense_avancee(grille, colonne)
+
+            #print(f"colonne {colonne} : {recompense}")
             # Vérification si la récompense est meilleure que la meilleure récompense actuelle
             if recompense > meilleure_recompense:
                 meilleures_colonnes = [colonne]  # Remplacer les meilleures colonnes précédentes

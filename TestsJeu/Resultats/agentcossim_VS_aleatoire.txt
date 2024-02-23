@@ -1,0 +1,5 @@
+agentcossim vs aleatoire Iterations de 1 a 100 sur 10000 // V : 58 // D : 42 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 60.56 // Epsilon 1.0
+agentcossim vs aleatoire Iterations de 101 a 200 sur 10000 // V : 48 // D : 52 // Nul : 0 // Win Rate : 0.48 // Recompense moyenne : 57.34 // Epsilon 1.0
+agentcossim vs aleatoire Iterations de 201 a 300 sur 10000 // V : 64 // D : 36 // Nul : 0 // Win Rate : 0.64 // Recompense moyenne : 62.0 // Epsilon 1.0
+agentcossim vs aleatoire Iterations de 301 a 400 sur 10000 // V : 49 // D : 51 // Nul : 0 // Win Rate : 0.49 // Recompense moyenne : 55.24 // Epsilon 1.0
+agentcossim vs aleatoire Iterations de 401 a 500 sur 10000 // V : 65 // D : 35 // Nul : 0 // Win Rate : 0.65 // Recompense moyenne : 60.33 // Epsilon 1.0

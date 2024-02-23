@@ -37,7 +37,7 @@ class DQNAgent:
             lossFunc = "custom"
             self.model.compile(optimizer='adam', loss=lossFunc)
         else:
-            self.model.compile(optimizer='adam', loss="squared_hinge")
+            self.model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss="squared_hinge")
             #  Mean Squared Error (MSE) Loss: tf.keras.losses.mean_squared_error
             #  Mean Absolute Error (MAE) Loss: tf.keras.losses.mean_absolute_error
             #  Binary Crossentropy Loss: tf.keras.losses.binary_crossentropy
@@ -188,7 +188,7 @@ class DQNAgent:
 
 
     # Méthode pour évaluer le modèle
-    def evaluate_model(self):
+    def evaluate_model(self,verbose=1):
         # Chargement des données d'évaluation à partir du fichier JSON
         with open('evaluation_data.json', 'r') as f:
             evaluation_data = json.load(f)
@@ -216,7 +216,8 @@ class DQNAgent:
             #     print(X_eval[i])
             #     print(f"Act Bot {reponseBot + 1}")
             #     print(f"Bonne reponse {y_eval[i] +1}" )
-        print(f"Nombre bonne reponse {bonpoint} / {len(X_eval)}")
+        if(verbose):
+            print(f"Nombre bonne reponse {bonpoint} / {len(X_eval)}")
 
         loss = self.model.evaluate(X_eval, y_eval, verbose=0)
 
@@ -226,6 +227,8 @@ class DQNAgent:
         current_time = int(time.time())
         with tf.summary.create_file_writer(f"logs/{self.name}/eval").as_default():
             tf.summary.scalar("score", bonpoint, step=current_time)
+
+        return bonpoint
 
 
     

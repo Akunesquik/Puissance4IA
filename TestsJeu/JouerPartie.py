@@ -1,9 +1,12 @@
 from Game.Game_Puissance4 import   Puissance4
 from FonctionsUtiles import *
+from CreationJeuDeDonneePourEvaluate import trouver_meilleure_colonne_array, jouer_coup
+import time
 
 # Fonction pour lancer le jeu
 def main():
 
+    typeBestMove = "all"
     nb_episodes = getNbEpisode()
     # Setup de la game
     game = Puissance4()
@@ -29,7 +32,7 @@ def main():
         while jeu_termine == False:
 
             # Afficher la Fenetre
-            game.render(fenetre)
+            game.render(fenetre,game.grid)
 
             # Gere les choix joueurs
             if(game.get_current_player() == 1):
@@ -40,8 +43,15 @@ def main():
 
             # Si pion valide
             if game.is_valid_move(colonne):
-                game.make_move(colonne)
+                
+                
+                if typeAgent1.startswith('agent') and game.get_current_player() == 1:
+                    afficherBestMoves(game,fenetre,colonne,typeBestMove)
+                if typeAgent2.startswith('agent') and game.get_current_player() == 2:
+                    afficherBestMoves(game,fenetre,colonne,typeBestMove)
 
+                game.make_move(colonne)
+                
                 #Check de si y'a un winner dans la partie
                 winner = game.is_winner()
                 if winner:
@@ -52,7 +62,7 @@ def main():
                     jeu_termine = True
                 
                 game.switch_player()
-
+                
             else:
                 print("Coup invalide. Réessayez.")      
 
