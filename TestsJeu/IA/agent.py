@@ -26,8 +26,10 @@ class DQNAgent:
     def build_model(self):
         self.model = Sequential([
             Flatten(input_shape=self.state_size),  # Flatten the input grid
-            Dense(128, activation='relu'),  # Add a dense layer with 128 units and ReLU activation
-            Dense(64, activation='relu'),   # Add another dense layer with 64 units and ReLU activation
+            Dense(128, activation='relu'),   # Add another dense layer with 128 units and ReLU activation
+            Dense(256, activation='relu'),   # Add another dense layer with 256 units and ReLU activation
+            Dense(128, activation='relu'),   # Add another dense layer with 128 units and ReLU activation
+            Dense(32, activation='relu'),   # Add another dense layer with 64 units and ReLU activation
             Dense(self.action_size, activation='linear')  # Output layer with softmax activation
         ])
 
@@ -37,7 +39,7 @@ class DQNAgent:
             lossFunc = "custom"
             self.model.compile(optimizer='adam', loss=lossFunc)
         else:
-            self.model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss="squared_hinge")
+            self.model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss="mean_absolute_error")
             #  Mean Squared Error (MSE) Loss: tf.keras.losses.mean_squared_error
             #  Mean Absolute Error (MAE) Loss: tf.keras.losses.mean_absolute_error
             #  Binary Crossentropy Loss: tf.keras.losses.binary_crossentropy
@@ -186,7 +188,6 @@ class DQNAgent:
         self.model = tf.keras.models.load_model(pathModel)
         print(f"Model loaded for {self.name}")
         self.compile_model("")
-
 
     # Méthode pour évaluer le modèle
     def evaluate_model(self,verbose=1):

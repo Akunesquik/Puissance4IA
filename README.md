@@ -3,22 +3,19 @@ Projet de fin d'études
 
 ## Creer un nouvel environnement python et l'activer
 pip install virtualenv
-
-### Une des deux selon ce qui fonctionne
-python -m virtualenv Puissance4env /// virtualenv Puissance4env
-
-
-
+python -m virtualenv Puissance4env 
 Puissance4env\Scripts\activate
 
-### Desactiver le virtualenv creer plus tot : 
+### Desactiver le virtualenv créé plus tôt : 
 deactivate
 
 
-
-## Packages nécessaires
+## Installer tous les packages nécessaires dans le nouvel environnement
 
 pip install -r requirements.txt
 
+## Entrainement
+Vous pouvez utiliser le fochoer NewTrain.py
 
-tensorboard --logdir logs
+
+

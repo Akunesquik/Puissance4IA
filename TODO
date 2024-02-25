@@ -25,3 +25,5 @@ https://python.hotexamples.com/examples/rl.agents.dqn/DQNAgent/load_weights/pyth
 
 pip freeze > requirements.txt
 
+tensorboard --logdir logs
+

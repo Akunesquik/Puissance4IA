@@ -27,7 +27,7 @@ def main():
         fenetre = game.creation_fenetre()
         jeu_termine = False
         game.reset()
-
+        
         #Commencement de l'entrainement
         while jeu_termine == False:
 
