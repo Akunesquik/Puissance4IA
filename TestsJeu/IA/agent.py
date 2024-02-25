@@ -76,7 +76,6 @@ class DQNAgent:
             target_f = self.model.predict(state,verbose=0)
             target_f[0][action] = target
             states.append(state[0])
-            print(state)
             targets.append(target_f[0])
         self.model.fit(np.array(states), np.array(targets), epochs=10, verbose=0 )# , callbacks=[self.tensorboard])
 
@@ -129,19 +128,21 @@ class DQNAgent:
 
         for state, action, reward, next_state, done in minibatch:
             state = state.reshape(1, 6, 7)
-            states.append(state[0])
-            optimals_moves = trouver_meilleure_colonne_array(state[0])
-            optimal_moves.append(optimals_moves)
+            
+            optimal_move = trouver_meilleure_colonne_array(state[0],1,"atk")
+            
+            if optimal_move:
+                states.append(state[0])
+                optimal_moves.append(random.choice(optimal_move))
 
         # Convertir optimal_moves en un format compatible avec la fonction de perte
         optimal_moves_array = np.zeros((len(optimal_moves), 7))
         for i, moves in enumerate(optimal_moves):
             optimal_moves_array[i, moves] = 1
 
-        train_dataset = tf.data.Dataset.from_tensor_slices((states, optimal_moves_array))
-        train_dataset = train_dataset.shuffle(self.memory_size).batch(self.batch_size)
-        history  = self.model.fit(train_dataset, epochs=10, verbose=0 )# , callbacks=[self.tensorboard])
-        loss = history.history['loss'][-1]
+        newState = np.array(states)
+        newMoves = np.array(optimal_moves_array)
+        history  = self.model.fit(newState,newMoves, epochs=10, verbose=0 ,validation_split=0.2)# , callbacks=[self.tensorboard])
 
     def save_model_agent(self):
         path = 'TestsJeu/Save_Agent/'

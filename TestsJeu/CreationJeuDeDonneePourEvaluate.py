@@ -76,7 +76,7 @@ def TrouveMeilleureActionAvecReward(next_state):
 
 def trouver_meilleure_colonne_array(grille,joueur,typeBestMove):
     meilleures_colonnes = []  # Liste pour stocker les colonnes avec les récompenses maximales
-    meilleure_recompense = float('-inf')  # Initialisation de la meilleure récompense avec une valeur minimale
+    meilleure_recompense = -1  # Initialisation de la meilleure récompense avec une valeur minimale
 
     # Parcours de chaque colonne de la grille
     for colonne in range(len(grille[0])):

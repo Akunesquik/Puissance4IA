@@ -98,10 +98,11 @@ def trouver_dernier_pion(grille, colonne):
 
 def calculer_recompense_attaquant(grille, colonne):
 
+    recompense=0
     ligne = trouver_dernier_pion(grille, colonne)
-    diagodroite = longueur_chaine_diagonale_droite(grille,ligne,colonne)
-    diagogauche = longueur_chaine_diagonale_gauche(grille,ligne,colonne)
-    horizontale = longueur_chaine_horizontale(grille,ligne,colonne)
-    verticale = longueur_chaine_verticale(grille,ligne,colonne)
+    recompense += longueur_chaine_diagonale_droite(grille,ligne,colonne)
+    recompense += longueur_chaine_diagonale_gauche(grille,ligne,colonne)
+    recompense += longueur_chaine_horizontale(grille,ligne,colonne)
+    recompense += longueur_chaine_verticale(grille,ligne,colonne)
 
-    return diagodroite+diagogauche+horizontale+verticale
+    return recompense

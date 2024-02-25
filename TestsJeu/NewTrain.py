@@ -92,7 +92,7 @@ def main():
                     if typeAgent2.startswith('agent'):
                         ia_recompense_totale += RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
 
-        agent1.replay()
+        agent1.replay3()
         if i % (mod) == 0 and i != 0:
             agent1.save_model_agent()
             EcrireResultat(agent1,typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
