@@ -27,3 +27,7 @@ agentplop vs aleatoire Iterations de 301 a 350 sur 10000 // V : 33 // D : 17 // 
 agentplop vs aleatoire Iterations de 351 a 400 sur 10000 // V : 25 // D : 25 // Nul : 0 // Win Rate : 0.5 // Recompense moyenne : 357.04 // Epsilon 0.6432507594921204
 agentplop vs aleatoire Iterations de 401 a 450 sur 10000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 389.82 // Epsilon 0.6261068997312542
 agentplop vs aleatoire Iterations de 451 a 500 sur 10000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 361.54 // Epsilon 0.6112518790281489
+agentplop vs aleatoire Iterations de 501 a 550 sur 10000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 438.08 // Epsilon 0.5919919898800042
+agentplop vs aleatoire Iterations de 551 a 600 sur 10000 // V : 28 // D : 20 // Nul : 2 // Win Rate : 0.56 // Recompense moyenne : 411.78 // Epsilon 0.5750624217730242
+agentplop vs aleatoire Iterations de 601 a 650 sur 10000 // V : 24 // D : 26 // Nul : 0 // Win Rate : 0.48 // Recompense moyenne : 370.82 // Epsilon 0.5597359112837013
+agentplop vs aleatoire Iterations de 651 a 700 sur 10000 // V : 36 // D : 14 // Nul : 0 // Win Rate : 0.72 // Recompense moyenne : 492.38 // Epsilon 0.5437287905895168
