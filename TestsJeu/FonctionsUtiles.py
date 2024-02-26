@@ -1,4 +1,6 @@
 from IA.recompenseAttaquant import calculer_recompense_attaquant
+from IA.recompenseAvancee import ajout_recompense_avancee
+from IA.recompenseDeffenseur import calculer_recompense_defenseur
 from IA.agent import DQNAgent
 from CreationJeuDeDonneePourEvaluate import trouver_meilleure_colonne_array, jouer_coup
 import sys, os
@@ -11,6 +13,8 @@ def RememberAgent(game,agent,colonne,ia_prev_state,jeu_termine,ia_recompense):
     ia_action = colonne
     ia_next_state = game.get_grid()
     ia_recompense = calculer_recompense_attaquant(ia_next_state,ia_action)
+    ia_recompense += ajout_recompense_avancee(ia_next_state,ia_action)
+    ia_recompense += calculer_recompense_defenseur(ia_next_state,ia_action)
     agent.remember(ia_prev_state,ia_action,ia_recompense,ia_next_state,ia_done)
 
     return ia_recompense
@@ -57,7 +61,7 @@ def getColonneByPlayer(game,typeJoueur,agent):
         ia_prev_state = game.get_grid()
         colonne = agent.act(ia_prev_state)
     elif typeJoueur == 'minmax':
-        depth = 4
+        depth = 10
         prev_state = game.get_grid()
         colonne , _ = game.minimax(prev_state,depth,True,2)
 

@@ -1,0 +1,15 @@
+agentttt vs aleatoire Iterations de 1 a 100 sur 100000 // V : 58 // D : 42 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 325.31 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 101 a 200 sur 100000 // V : 49 // D : 51 // Nul : 0 // Win Rate : 0.49 // Recompense moyenne : 284.1 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 201 a 300 sur 100000 // V : 58 // D : 42 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 340.0 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 301 a 400 sur 100000 // V : 56 // D : 44 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 318.17 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 401 a 500 sur 100000 // V : 60 // D : 40 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 352.0 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 1 a 100 sur 10000 // V : 54 // D : 46 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 318.35 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 101 a 200 sur 10000 // V : 46 // D : 54 // Nul : 0 // Win Rate : 0.46 // Recompense moyenne : 286.31 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 201 a 300 sur 10000 // V : 58 // D : 42 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 350.98 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 301 a 400 sur 10000 // V : 56 // D : 44 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 318.54 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 401 a 500 sur 10000 // V : 60 // D : 40 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 345.38 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 501 a 600 sur 10000 // V : 52 // D : 47 // Nul : 1 // Win Rate : 0.52 // Recompense moyenne : 311.84 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 1 a 100 sur 10000 // V : 49 // D : 51 // Nul : 0 // Win Rate : 0.49 // Recompense moyenne : 300.79 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 101 a 200 sur 10000 // V : 59 // D : 40 // Nul : 1 // Win Rate : 0.59 // Recompense moyenne : 347.22 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 201 a 300 sur 10000 // V : 51 // D : 49 // Nul : 0 // Win Rate : 0.51 // Recompense moyenne : 298.35 // Epsilon 1.0
+agentttt vs aleatoire Iterations de 301 a 400 sur 10000 // V : 47 // D : 53 // Nul : 0 // Win Rate : 0.47 // Recompense moyenne : 280.72 // Epsilon 1.0

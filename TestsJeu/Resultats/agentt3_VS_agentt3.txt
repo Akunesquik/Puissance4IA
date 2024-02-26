@@ -1,0 +1,2 @@
+agentt3 vs agentt3 Iterations de 1 a 50 sur 100000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 608.58 // Epsilon 1.0
+agentt3 vs agentt3 Iterations de 51 a 100 sur 100000 // V : 25 // D : 25 // Nul : 0 // Win Rate : 0.5 // Recompense moyenne : 592.02 // Epsilon 1.0

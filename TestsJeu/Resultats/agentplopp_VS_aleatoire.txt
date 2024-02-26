@@ -1,0 +1,6 @@
+agentplopp vs aleatoire Iterations de 1 a 100 sur 10000 // V : 54 // D : 46 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 318.65 // Epsilon 1.0
+agentplopp vs aleatoire Iterations de 101 a 200 sur 10000 // V : 59 // D : 40 // Nul : 1 // Win Rate : 0.59 // Recompense moyenne : 339.06 // Epsilon 1.0
+agentplopp vs aleatoire Iterations de 201 a 300 sur 10000 // V : 63 // D : 37 // Nul : 0 // Win Rate : 0.63 // Recompense moyenne : 355.23 // Epsilon 1.0
+agentplopp vs aleatoire Iterations de 301 a 400 sur 10000 // V : 56 // D : 44 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 345.01 // Epsilon 1.0
+agentplopp vs aleatoire Iterations de 401 a 500 sur 10000 // V : 55 // D : 45 // Nul : 0 // Win Rate : 0.55 // Recompense moyenne : 318.73 // Epsilon 1.0
+agentplopp vs aleatoire Iterations de 501 a 600 sur 10000 // V : 58 // D : 42 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 346.09 // Epsilon 1.0

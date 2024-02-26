@@ -1,0 +1,3 @@
+agent2 vs agentt Iterations de 1 a 50 sur 10000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 591.72 // Epsilon 1.0
+agent2 vs agentt Iterations de 51 a 100 sur 10000 // V : 27 // D : 23 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 597.02 // Epsilon 1.0
+agent2 vs agentt Iterations de 101 a 150 sur 10000 // V : 24 // D : 26 // Nul : 0 // Win Rate : 0.48 // Recompense moyenne : 611.02 // Epsilon 1.0

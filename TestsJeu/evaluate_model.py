@@ -1,7 +1,7 @@
 import os
 from FonctionsUtiles import charger_agent
 
-plop = 100
+plop = 5
 # Chemin vers le répertoire contenant les agents sauvegardés
 chemin_repertoire_agents = "TestsJeu/Save_Agent/models/"
 

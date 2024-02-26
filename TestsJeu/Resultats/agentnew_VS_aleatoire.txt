@@ -1,0 +1,2 @@
+agentnew vs aleatoire Iterations de 1 a 50 sur 1000 // V : 26 // D : 24 // Nul : 0 // Win Rate : 0.52 // Recompense moyenne : 385.54 // Epsilon 0.9743224148844496
+agentnew vs aleatoire Iterations de 51 a 100 sur 1000 // V : 21 // D : 29 // Nul : 0 // Win Rate : 0.42 // Recompense moyenne : 336.9 // Epsilon 0.9483548639781193

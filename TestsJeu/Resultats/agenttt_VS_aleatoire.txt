@@ -1,0 +1,1 @@
+agenttt vs aleatoire Iterations de 1 a 100 sur 10000 // V : 62 // D : 38 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 345.2 // Epsilon 1.0

@@ -1,0 +1,4 @@
+agentt3 vs aleatoire Iterations de 1 a 50 sur 10000 // V : 33 // D : 17 // Nul : 0 // Win Rate : 0.66 // Recompense moyenne : 387.5 // Epsilon 0.9521577859830145
+agentt3 vs aleatoire Iterations de 1 a 50 sur 10000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 317.62 // Epsilon 0.9295668775782806
+agentt3 vs aleatoire Iterations de 51 a 100 sur 10000 // V : 27 // D : 23 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 320.74 // Epsilon 0.9029834676116293
+agentt3 vs aleatoire Iterations de 101 a 150 sur 10000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 374.16 // Epsilon 0.8771602801771059

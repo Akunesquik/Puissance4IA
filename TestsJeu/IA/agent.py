@@ -3,6 +3,7 @@ from collections import deque
 from keras.models import Sequential
 from keras.layers import Dense, Flatten, Conv2D, Reshape, Dropout
 from keras.optimizers import Adam
+from keras.utils import to_categorical
 import tensorflow as tf
 import random, time, json
 from datetime import datetime
@@ -12,7 +13,7 @@ class DQNAgent:
     def __init__(self, learning_rate=None, gamma=None, epsilon=1.0, epsilon_decay=0.999, epsilon_min=None, memory_size=None, batch_size=16):
         self.state_size = (6, 7)
         self.action_size = 7
-        self.learning_rate = learning_rate if learning_rate is not None else random.uniform(1e-5, 1e-1)
+        self.learning_rate = learning_rate if learning_rate is not None else 0.01
         self.gamma = gamma if gamma is not None else random.uniform(0.9, 0.999)
         self.epsilon = epsilon
         self.epsilon_decay = epsilon_decay 
@@ -26,10 +27,8 @@ class DQNAgent:
     def build_model(self):
         self.model = Sequential([
             Flatten(input_shape=self.state_size),  # Flatten the input grid
-            Dense(128, activation='relu'),   # Add another dense layer with 128 units and ReLU activation
             Dense(256, activation='relu'),   # Add another dense layer with 256 units and ReLU activation
-            Dense(128, activation='relu'),   # Add another dense layer with 128 units and ReLU activation
-            Dense(32, activation='relu'),   # Add another dense layer with 64 units and ReLU activation
+            Dense(64, activation='relu'),   # Add another dense layer with 64 units and ReLU activation
             Dense(self.action_size, activation='linear')  # Output layer with softmax activation
         ])
 
@@ -39,7 +38,7 @@ class DQNAgent:
             lossFunc = "custom"
             self.model.compile(optimizer='adam', loss=lossFunc)
         else:
-            self.model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss="mean_absolute_error")
+            self.model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss="mae")
             #  Mean Squared Error (MSE) Loss: tf.keras.losses.mean_squared_error
             #  Mean Absolute Error (MAE) Loss: tf.keras.losses.mean_absolute_error
             #  Binary Crossentropy Loss: tf.keras.losses.binary_crossentropy
@@ -59,9 +58,12 @@ class DQNAgent:
         self.memory.append((state, action, reward, next_state, done))
 
     def act(self, state):
+        state = state.reshape(1, 6, 7)
         if np.random.rand() <= self.epsilon:
             return np.random.randint(self.action_size)
+        #print(state)
         q_values = self.model.predict(state, verbose=0)
+        print(q_values)
         return np.argmax(q_values[0])
 
     def replay2(self):
@@ -79,48 +81,57 @@ class DQNAgent:
             target_f[0][action] = target
             states.append(state[0])
             targets.append(target_f[0])
-        self.model.fit(np.array(states), np.array(targets), epochs=10, verbose=0 )# , callbacks=[self.tensorboard])
+        self.model.fit(np.array(states), np.array(targets), epochs=1, verbose=0 )# , callbacks=[self.tensorboard])
 
-        # if self.epsilon > self.epsilon_min:
-        #     self.epsilon -= self.epsilon_decay
+        self.memory.clear()
+        if self.epsilon > self.epsilon_min:
+           self.epsilon *= self.epsilon_decay
 
-    def replay(self):            
+
+    def replay(self):
+
         if len(self.memory) < self.batch_size:
             return
 
         minibatch = random.sample(self.memory, self.batch_size)
-        states, targets = [], []
+        states, optimal_moves = [], []
 
         for state, action, reward, next_state, done in minibatch:
             state = state.reshape(1, 6, 7)
-            next_state = next_state.reshape(1, 6, 7) 
-            target = reward
-
-            if not done:
-                target = (reward + self.gamma * np.amax(self.model.predict(next_state,verbose=0)[0]))
-
-            target_f = self.model.predict(state,verbose=0)
-            target_f[0][action] = target
-
             states.append(state[0])
-            targets.append(target_f[0])
+            optimal_moves.append(trouver_meilleure_colonne_array(state[0], 1, "atk"))
+
+        # Convertir optimal_moves en un format compatible avec la fonction de perte
+        optimal_moves_array = np.zeros((len(optimal_moves), 7))
+        for i, moves in enumerate(optimal_moves):
+            if moves is not None:
+                optimal_moves_array[i, moves] = 1
 
         states = np.array(states)
-        targets = np.array(targets)
+        targets = np.array(optimal_moves_array)
 
         with tf.GradientTape() as tape:
             predictions = self.model(states)
-            loss = tf.keras.losses.mean_squared_error(targets, predictions)
-        
+            loss = self.custom_error(targets, predictions)
+
         grads = tape.gradient(loss, self.model.trainable_variables)
         self.model.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
 
-        
-        # Effacer la mémoire après le replay
-        self.memory.clear()
+        return loss
 
-        return loss  
-    
+    def custom_error(self, y_true, y_pred):
+
+        y_true = tf.cast(y_true, tf.float32)
+        y_pred = tf.cast(y_pred, tf.float32)
+
+        # Assurez-vous que les formes des tensors sont compatibles
+        assert y_true.shape == y_pred.shape, "Les formes des tensors doivent être compatibles"
+
+        # Calculez l'erreur personnalisée
+        error = tf.keras.losses.hinge(y_true, y_pred)
+
+        return error
+        
     # Replay avec la fonction de perte personnalisée
     def replay3(self):
         if len(self.memory) < self.batch_size:
@@ -144,7 +155,8 @@ class DQNAgent:
 
         newState = np.array(states)
         newMoves = np.array(optimal_moves_array)
-        history  = self.model.fit(newState,newMoves, epochs=10, verbose=0 ,validation_split=0.2)# , callbacks=[self.tensorboard])
+        history  = self.model.fit(newState,optimal_moves_array, epochs=5, verbose=0 ,validation_split=0.2)# , callbacks=[self.tensorboard])
+       
 
     def save_model_agent(self):
         path = 'TestsJeu/Save_Agent/'
@@ -208,8 +220,10 @@ class DQNAgent:
 
         bonpoint = 0
         for i in range(len(X_eval)): 
+            state = X_eval[i].reshape(1, 6, 7)
             # Evaluation du modèle
-            reponseBot = self.act(X_eval[i])
+            q_values = self.model.predict(state, verbose=0)
+            reponseBot = np.argmax(q_values)
             if isinstance(y_eval[i], list) and reponseBot in y_eval[i]: 
                 bonpoint += 1
             elif reponseBot == y_eval[i]:
@@ -231,6 +245,10 @@ class DQNAgent:
             tf.summary.scalar("score", bonpoint, step=current_time)
 
         return bonpoint
+    
+
+    
+
 
 
     

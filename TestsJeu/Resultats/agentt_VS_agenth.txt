@@ -1,0 +1,5 @@
+agentt vs agenth Iterations de 1 a 50 sur 10000 // V : 31 // D : 18 // Nul : 1 // Win Rate : 0.62 // Recompense moyenne : 599.4 // Epsilon 1.0
+agentt vs agenth Iterations de 51 a 100 sur 10000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 581.88 // Epsilon 1.0
+agentt vs agenth Iterations de 101 a 150 sur 10000 // V : 27 // D : 22 // Nul : 1 // Win Rate : 0.54 // Recompense moyenne : 576.84 // Epsilon 1.0
+agentt vs agenth Iterations de 151 a 200 sur 10000 // V : 29 // D : 21 // Nul : 0 // Win Rate : 0.58 // Recompense moyenne : 577.46 // Epsilon 1.0
+agentt vs agenth Iterations de 201 a 250 sur 10000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 584.04 // Epsilon 1.0
