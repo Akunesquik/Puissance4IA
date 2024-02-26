@@ -1,0 +1,7 @@
+agentplop vs agentplop Iterations de 1 a 50 sur 100000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 715.54 // Epsilon 0.5187525878460405
+agentplop vs agentplop Iterations de 51 a 100 sur 100000 // V : 27 // D : 23 // Nul : 0 // Win Rate : 0.54 // Recompense moyenne : 776.46 // Epsilon 0.5029101620180685
+agentplop vs agentplop Iterations de 101 a 150 sur 100000 // V : 31 // D : 19 // Nul : 0 // Win Rate : 0.62 // Recompense moyenne : 717.28 // Epsilon 0.4904871306580321
+agentplop vs agentplop Iterations de 151 a 200 sur 100000 // V : 28 // D : 22 // Nul : 0 // Win Rate : 0.56 // Recompense moyenne : 718.68 // Epsilon 0.47789260561247826
+agentplop vs agentplop Iterations de 201 a 250 sur 100000 // V : 30 // D : 20 // Nul : 0 // Win Rate : 0.6 // Recompense moyenne : 702.96 // Epsilon 0.4642260095219155
+agentplop vs agentplop Iterations de 251 a 300 sur 100000 // V : 25 // D : 23 // Nul : 2 // Win Rate : 0.5 // Recompense moyenne : 716.84 // Epsilon 0.4514016473420717
+agentplop vs agentplop Iterations de 301 a 350 sur 100000 // V : 23 // D : 23 // Nul : 4 // Win Rate : 0.46 // Recompense moyenne : 743.0 // Epsilon 0.438054137254317

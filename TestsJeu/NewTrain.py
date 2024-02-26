@@ -26,7 +26,7 @@ def main():
       
     for i in range(1,nb_episodes+1):
         ## Setup des variables necessaire au focntionnement du training
-        fenetre = game.creation_fenetre()
+        #fenetre = game.creation_fenetre()
         jeu_termine = False
         game.reset()
         compteur_loupe = 0
@@ -34,14 +34,14 @@ def main():
         while jeu_termine == False:
 
             # Afficher la Fenetre
-            game.render(fenetre,game.get_grid())
+            #game.render(fenetre,game.get_grid())
             
             # Gere les choix joueurs
             ia_prev_state = game.grid
             if(game.get_current_player() == 1):
                 colonne = getColonneByPlayer(game,typeAgent1,agent1)
             else:
-                colonne = getColonneByPlayer(game,typeAgent1,agent1)
+                colonne = getColonneByPlayer(game,typeAgent2,agent2)
             
             if compteur_loupe == 3:
                 while(not(game.is_valid_move(colonne))):
@@ -77,7 +77,7 @@ def main():
                     if typeAgent2.startswith('agent'):
                         ia_recompense_totale += RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
                 
-                game.render(fenetre,game.get_grid())
+                #game.render(fenetre,game.get_grid())
                 game.switch_player()
 
             else:
