@@ -18,6 +18,7 @@ def main():
         agent1=charger_agent(typeAgent1)
     if typeAgent2.startswith('agent'):
         agent2=charger_agent(typeAgent2)
+        agent2.epsilon = 0.1
 
     mod = 50
     modEvaluation = 5*mod
@@ -87,13 +88,14 @@ def main():
                 if(game.get_current_player() == 1):
                     if typeAgent1.startswith('agent'):
                        RememberAgent(game,agent1,colonne,ia_prev_state,jeu_termine,ia_recompense)
-                            
+                       agent1.replay2()         
                 else:
                     if typeAgent2.startswith('agent'):
                         RememberAgent(game,agent2,colonne,ia_prev_state,jeu_termine,ia_recompense)
 
-        agent1.replay2()
-        if i % (mod) == 0 and i != 0:
+        if typeAgent1.startswith('agent'):
+            agent1.replay2()
+        if i % (mod) == 0 and i != 0 and typeAgent1.startswith('agent'):
             agent1.save_model_agent()
             EcrireResultat(agent1,typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
             win,lose,draw = 0,0,0

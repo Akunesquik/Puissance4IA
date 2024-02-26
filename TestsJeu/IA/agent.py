@@ -13,7 +13,7 @@ class DQNAgent:
     def __init__(self, learning_rate=None, gamma=None, epsilon=1.0, epsilon_decay=0.999, epsilon_min=None, memory_size=None, batch_size=16):
         self.state_size = (6, 7)
         self.action_size = 7
-        self.learning_rate = learning_rate if learning_rate is not None else 0.01
+        self.learning_rate = learning_rate if learning_rate is not None else 0.00001
         self.gamma = gamma if gamma is not None else random.uniform(0.9, 0.999)
         self.epsilon = epsilon
         self.epsilon_decay = epsilon_decay 
@@ -81,7 +81,7 @@ class DQNAgent:
             target_f[0][action] = target
             states.append(state[0])
             targets.append(target_f[0])
-        self.model.fit(np.array(states), np.array(targets), epochs=1, verbose=0 )# , callbacks=[self.tensorboard])
+        self.model.fit(np.array(states), np.array(targets), epochs=5, verbose=0 )# , callbacks=[self.tensorboard])
 
         self.memory.clear()
         if self.epsilon > self.epsilon_min:
