@@ -105,11 +105,12 @@ def main():
                 epsilon1 = agent1.epsilon
                 if i % (modEvaluation) == 0:
                     agent1.evaluate_model()
-            if typeAgent1.startswith('agent'):
-                agent2.save_model_agent()
+            if typeAgent2.startswith('agent') :
                 epsilon2 = agent2.epsilon
-                if i % (modEvaluation) == 0:
-                    agent2.evaluate_model()
+                if typeAgent2 != typeAgent1:
+                    agent2.save_model_agent()
+                    if i % (modEvaluation) == 0:
+                        agent2.evaluate_model()
 
             EcrireResultat(epsilon1,epsilon2,typeAgent1,typeAgent2,win,lose,draw,ia_recompense_totale,i,mod,nb_episodes)  
             win,lose,draw = 0,0,0

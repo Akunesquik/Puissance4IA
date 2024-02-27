@@ -1,0 +1,14 @@
+agentreco vs agentreco Iterations de 1 a 50 sur 100000 // V : 14 // D : 36 // Nul : 0 // Win Rate : 0.28 // Recompense moyenne : 453.36 // Epsilon 1 : 0.986090636999001 // Epsilon 2 : 0.0985104546362002
+agentreco vs agentreco Iterations de 51 a 100 sur 100000 // V : 16 // D : 34 // Nul : 0 // Win Rate : 0.32 // Recompense moyenne : 453.84 // Epsilon 1 : 0.9704309672630859 // Epsilon 2 : 0.09694605362958227
+agentreco vs agentreco Iterations de 101 a 150 sur 100000 // V : 11 // D : 39 // Nul : 0 // Win Rate : 0.22 // Recompense moyenne : 461.34 // Epsilon 1 : 0.9559759577813409 // Epsilon 2 : 0.09531108968798942
+agentreco vs agentreco Iterations de 151 a 200 sur 100000 // V : 19 // D : 31 // Nul : 0 // Win Rate : 0.38 // Recompense moyenne : 450.08 // Epsilon 1 : 0.9389138777035492 // Epsilon 2 : 0.09351638519212845
+agentreco vs agentreco Iterations de 201 a 250 sur 100000 // V : 15 // D : 35 // Nul : 0 // Win Rate : 0.3 // Recompense moyenne : 455.22 // Epsilon 1 : 0.9221563184394991 // Epsilon 2 : 0.09203129279589385
+agentreco vs agentreco Iterations de 251 a 300 sur 100000 // V : 9 // D : 41 // Nul : 0 // Win Rate : 0.18 // Recompense moyenne : 454.04 // Epsilon 1 : 0.9093297114626595 // Epsilon 2 : 0.09075119613694453
+agentreco vs agentreco Iterations de 301 a 350 sur 100000 // V : 13 // D : 37 // Nul : 0 // Win Rate : 0.26 // Recompense moyenne : 455.24 // Epsilon 1 : 0.8948890480710096 // Epsilon 2 : 0.08931001648639152
+agentreco vs agentreco Iterations de 351 a 400 sur 100000 // V : 17 // D : 33 // Nul : 0 // Win Rate : 0.34 // Recompense moyenne : 457.14 // Epsilon 1 : 0.8797970327640969 // Epsilon 2 : 0.0876283119896928
+agentreco vs agentreco Iterations de 1 a 50 sur 100000 // V : 29 // D : 12 // Nul : 9 // Win Rate : 0.58 // Recompense moyenne : 332.94 // Epsilon 1 : 0.08377055948310874 // Epsilon 2 : 0.09704309672630858
+agentreco vs agentreco Iterations de 51 a 100 sur 100000 // V : 31 // D : 14 // Nul : 5 // Win Rate : 0.62 // Recompense moyenne : 384.46 // Epsilon 1 : 0.08032337005612528 // Epsilon 2 : 0.09379749638258454
+agentreco vs agentreco Iterations de 101 a 150 sur 100000 // V : 24 // D : 17 // Nul : 9 // Win Rate : 0.48 // Recompense moyenne : 338.54 // Epsilon 1 : 0.07671042341100781 // Epsilon 2 : 0.09084203817511965
+agentreco vs agentreco Iterations de 151 a 200 sur 100000 // V : 25 // D : 22 // Nul : 3 // Win Rate : 0.5 // Recompense moyenne : 367.22 // Epsilon 1 : 0.0733333204921504 // Epsilon 2 : 0.08806777104745708
+agentreco vs agentreco Iterations de 201 a 250 sur 100000 // V : 37 // D : 10 // Nul : 3 // Win Rate : 0.74 // Recompense moyenne : 385.68 // Epsilon 1 : 0.07003478640347471 // Epsilon 2 : 0.08572059695708877
+agentreco vs agentreco Iterations de 251 a 300 sur 100000 // V : 37 // D : 8 // Nul : 5 // Win Rate : 0.74 // Recompense moyenne : 369.64 // Epsilon 1 : 0.06688462043806333 // Epsilon 2 : 0.08318592181943676

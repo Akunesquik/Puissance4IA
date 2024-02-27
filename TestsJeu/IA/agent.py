@@ -28,6 +28,9 @@ class DQNAgent:
         self.model = Sequential([
             Flatten(input_shape=self.state_size),  # Flatten the input grid
             Dense(256, activation='relu'),   # Add another dense layer with 256 units and ReLU activation
+            Dense(512, activation='relu'),   # Add another dense layer with 256 units and ReLU activation
+            Dense(256, activation='relu'),   # Add another dense layer with 256 units and ReLU activation
+            Dense(256, activation='relu'),   # Add another dense layer with 256 units and ReLU activation
             Dense(64, activation='relu'),   # Add another dense layer with 64 units and ReLU activation
             Dense(self.action_size, activation='linear')  # Output layer with softmax activation
         ])
