@@ -81,7 +81,7 @@ def getNbEpisode():
     return nombre
 
 
-def EcrireResultat(agent, typeAgent, typeAgent2, win, lose, draw,recompenseTotale,i,mod,nb_episodesTotal):
+def EcrireResultat(eps1,eps2, typeAgent, typeAgent2, win, lose, draw,recompenseTotale,i,mod,nb_episodesTotal):
     # Définir le chemin d'accès au fichier
     fichier_resultats = f"TestsJeu/Resultats/{typeAgent}_VS_{typeAgent2}.txt"
 
@@ -93,7 +93,7 @@ def EcrireResultat(agent, typeAgent, typeAgent2, win, lose, draw,recompenseTotal
 
     # Ouvrir le fichier en mode append ("a") et ajouter la ligne
     with open(fichier_resultats, "a") as fichier:
-        ligne = typeAgent +" vs " + typeAgent2 +" Iterations de "+ str(i-mod+1) + " a " + str(i)+ " sur "+ str(nb_episodesTotal) + " // V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + str(win/mod) +" // Recompense moyenne : " + str(recompenseTotale/mod) + " // Epsilon " + str(agent.epsilon) 
+        ligne = typeAgent +" vs " + typeAgent2 +" Iterations de "+ str(i-mod+1) + " a " + str(i)+ " sur "+ str(nb_episodesTotal) + " // V : " + str(win) + " // D : " + str(lose) + " // Nul : " + str(draw) + " // Win Rate : " + str(win/mod) +" // Recompense moyenne : " + str(recompenseTotale/mod) + " // Epsilon 1 : " + str(eps1) + " // Epsilon 2 : " + str(eps2) 
         # Écrire la ligne dans le fichier
         fichier.write(ligne + "\n")
 

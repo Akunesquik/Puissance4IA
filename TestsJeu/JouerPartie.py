@@ -1,12 +1,10 @@
 from Game.Game_Puissance4 import   Puissance4
 from FonctionsUtiles import *
-from CreationJeuDeDonneePourEvaluate import trouver_meilleure_colonne_array, jouer_coup
-import time
 
 # Fonction pour lancer le jeu
 def main():
 
-    typeBestMove = "atk"
+    typeBestMove = "atk" # prends la valeur atk / def / avc / atkavc / defavc / all
     nb_episodes = getNbEpisode()
     # Setup de la game
     game = Puissance4()

@@ -63,7 +63,7 @@ class DQNAgent:
             return np.random.randint(self.action_size)
         #print(state)
         q_values = self.model.predict(state, verbose=0)
-        print(q_values)
+        #print(q_values)
         return np.argmax(q_values[0])
 
     def replay2(self):

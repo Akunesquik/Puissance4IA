@@ -1,5 +1,5 @@
 from IA.recompenseAttaquant import calculer_recompense_attaquant, trouver_dernier_pion
-from IA.recompenseDeffenseur import calculer_recompense_defenseur
+from IA.recompenseDefenseur import calculer_recompense_defenseur
 from IA.recompenseAvancee import ajout_recompense_avancee
 import numpy as np
 import random
