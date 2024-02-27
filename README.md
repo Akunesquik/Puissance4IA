@@ -1,5 +1,6 @@
 # Puissance4IA
 Projet de fin d'études
+https://github.com/Akunesquik/Puissance4IA.git
 
 ## Creer un nouvel environnement python et l'activer
 pip install virtualenv
@@ -38,6 +39,12 @@ vous pouvez utiliser le fichier JouerPartie.py
 ce fichier vous permettra de jouer (en sélectionnant vos agents contre qui vous voulez) et de voir ce que aurais du jouer la premier jouer en fonction des recompenses que vous choisissez dans typeBestMove(ligne 9)
 
 python TestsJeu/JouerPartie.py
+
+## TensorBoard
+Pour observé les résultats obtenus lors des évaluations, nous avons utilisé TensorBoard afin de sauvegarder les scores en fonction du temps
+Pour s'en servir utilisé la commande suivante qui hostera la page interne sur : http://localhost:6006
+
+tensorboard --logdir=./logs
 
 
 ### A savoir
